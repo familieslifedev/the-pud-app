@@ -46,3 +46,8 @@ function togglePudSlideshow() {
 
   slideshowInterval = setInterval(nextPudImage, 4000);
 }
+
+function stopPudSlideshow() {
+  clearInterval(slideshowInterval);
+  slideshowInterval = null;
+}

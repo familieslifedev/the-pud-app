@@ -1,6 +1,13 @@
-.slideshow-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+.pud-slideshow {
+  width: 100%;
+  max-width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+  margin: 12px auto;
+}
+
+.slideshow-card {
+  text-align: center;
 }
