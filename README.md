@@ -2,7 +2,7 @@
 
 ## Amphibious Enterprise Morale Monitoring Platform
 
-The Pud App is a completely serious and definitely mission-critical dashboard system for monitoring the operational status of Puddle, a Paldean Wooper plush.
+The Pud App is a completely serious and definitely mission-critical dashboard system for monitoring the operational status of Puddle, my Paldean Wooper plush.
 
 This project exists because coding is more fun when your life revolves around a tiny muddy creature.
 
@@ -69,6 +69,7 @@ Backend
 │   └── pud_data.json
 └── README.md
 ```
+
 ## 📈 Example Metrics
 
 The dashboard may monitor:
@@ -126,6 +127,7 @@ This software has not been approved by:
 * Any amphibian oversight committee
 
 Use responsibly.
+
 ## 👁️‿👁️ Final Statement
 
 amphibious enterprise morale monitoring platform development initiative approved for implementation.
