@@ -1,11 +1,12 @@
 .pud-slideshow {
   width: 100%;
-  max-width: 320px;
-  height: 220px;
+  max-width: 540px;
+  height: 540px;
   object-fit: cover;
   border-radius: 18px;
   display: block;
   margin: 12px auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .slideshow-card {

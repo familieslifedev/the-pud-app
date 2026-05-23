@@ -1,14 +1,14 @@
 const achievementRules = [
   {
     id: "first_bug",
-    name: "🐛 First Bug Bonked",
+    name: "🐛 Bug Bonker",
     condition: function () {
       return bugs >= 1;
     }
   },
   {
     id: "bug_intimidator",
-    name: "🐛 Bug Intimidator",
+    name: "🐛 Senior Bug Intimidator",
     condition: function () {
       return bugs >= 25;
     }
@@ -22,7 +22,7 @@ const achievementRules = [
   },
   {
     id: "corporate_survivor",
-    name: "💼 Corporate Survivor",
+    name: "💼 Corporate Amphibian",
     condition: function () {
       return meetings >= 10;
     }
@@ -39,6 +39,14 @@ const achievementRules = [
     name: "⏱️ One Hour Operator",
     condition: function () {
       return uptimeSeconds >= 3600;
+    }
+  },
+
+  {
+    id: "moisture_maxxer",
+    name: "🏅 Moisture Maxxer",
+    condition: function () {
+      return approval >= 100;
     }
   }
 ];

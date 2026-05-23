@@ -5,6 +5,9 @@
 @import url("./metrics.css");
 @import url("./timer.css");
 @import url("./loading.css");
+@import url("./achievements.css");
+@import url("./slideshow.css");
+@import url("./sounds.css");
 
 .hidden {
   display: none !important;
