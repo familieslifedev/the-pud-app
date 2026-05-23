@@ -1,0 +1,44 @@
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  background: #c7a27c;
+  display: grid;
+  place-content: center;
+  z-index: 9999;
+}
+
+.loading-content {
+  width: 420px;
+  max-width: 90vw;
+}
+
+.loading-content h1 {
+  font-size: 72px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+#loadingText {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 28px;
+  background: #3b2f24;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid #1f2933;
+}
+
+#loadingProgress {
+  width: 0%;
+  height: 100%;
+  background: #4ade80;
+  transition: width 0.08s linear;
+}
+
+.hidden {
+  display: none;
+}

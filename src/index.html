@@ -8,7 +8,21 @@
 </head>
 
 <body>
-  <main class="app">
+  <div id="loadingScreen">
+    <div class="loading-content">
+      <h1>👁️‿👁️</h1>
+
+      <p id="loadingText">
+        initialising puddle infrastructure...
+      </p>
+
+      <div class="loading-bar">
+        <div id="loadingProgress"></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="app hidden" id="app">
     <h1>👁️‿👁️ The Pud App</h1>
     <h2>moist amphibian enterprise software</h2>
 
@@ -87,6 +101,28 @@
     </section>
 
     <section class="card">
+      <h2>Pud Timer ⏱️</h2>
+
+      <div class="timer-box">
+        <h3>Monitoring Time</h3>
+        <p class="timer-display" id="uptimeDisplay">00:00:00</p>
+
+        <button onclick="startUptime()">Start</button>
+        <button onclick="pauseUptime()">Pause</button>
+        <button onclick="resetUptime()">Reset</button>
+      </div>
+
+      <div class="timer-box">
+        <h3>Pomodoro 🍅</h3>
+        <p class="timer-display" id="pomodoroDisplay">25:00</p>
+
+        <button onclick="startPomodoro()">Start</button>
+        <button onclick="pausePomodoro()">Pause</button>
+        <button onclick="resetPomodoro()">Reset</button>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Certification 🏆</h2>
       <p id="achievement">Chief Wooper Officer</p>
       <p><strong>Incident ID:</strong> <span id="incident">PUD-0001-HOME</span></p>
@@ -98,8 +134,10 @@
   <script src="./js/utils.js"></script>
   <script src="./js/ui.js"></script>
   <script src="./js/approval.js"></script>
+  <script src="./js/timer.js"></script>
   <script src="./js/actions.js"></script>
   <script src="./js/storage.js"></script>
+  <script src="./js/loading.js"></script>
   <script src="./js/app.js"></script>
 </body>
 

@@ -1,0 +1,12 @@
+.timer-box {
+  background: #f5eadc;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.timer-display {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 10px 0;
+}
