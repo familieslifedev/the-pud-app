@@ -39,7 +39,7 @@ function loadSoundEnvironment(environment) {
 
     row.innerHTML = `
       <span>${file.replace(".mp3", "")}</span>
-      <button onclick="toggleSound('${file}')">Play / Pause</button>
+      <button onclick="toggleSound('${file}')">Play / Pause ⏯️</button>
       <input type="range" min="0" max="100" value="50" oninput="setSoundVolume('${file}', this.value)" />
     `;
 
@@ -71,9 +71,20 @@ function stopAllSounds() {
   Object.values(activeSounds).forEach(function (audio) {
     audio.pause();
     audio.currentTime = 0;
+    audio.volume = 0.5;
   });
 
-  activeSounds = {};
+  if (customSound) {
+    customSound.pause();
+    customSound.currentTime = 0;
+    customSound.volume = 0.5;
+  }
+
+  document
+    .querySelectorAll(".sound-row input[type='range']")
+    .forEach(function (slider) {
+      slider.value = 50;
+    });
 }
 
 function loadCustomSound(input) {
