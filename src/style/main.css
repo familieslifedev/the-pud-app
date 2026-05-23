@@ -3,3 +3,9 @@
 @import url("./cards.css");
 @import url("./buttons.css");
 @import url("./metrics.css");
+@import url("./timer.css");
+@import url("./loading.css");
+
+.hidden {
+  display: none !important;
+}

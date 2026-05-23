@@ -4,3 +4,7 @@ let meetings = 0;
 let caffeine = 0;
 let weatherBonus = 0;
 let missionLogs = [];
+let uptimeSeconds = 0;
+let uptimeInterval = null;
+let pomodoroSeconds = 25 * 60;
+let pomodoroInterval = null;
