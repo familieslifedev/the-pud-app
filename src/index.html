@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Pud App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>👁️‿👁️ The Pud App</h1>
+    <p>Amphibious Enterprise Morale Monitoring Platform</p>
+
+    <section class="card">
+      <h2>Pud Status</h2>
+      <p><strong>Mood:</strong> <span id="mood">cosy</span></p>
+      <p><strong>Location:</strong> <span id="location">Home</span></p>
+      <p><strong>Morale:</strong> <span id="morale">88</span>%</p>
+      <p><strong>Snack Reserves:</strong> <span id="snacks">71</span>%</p>
+    </section>
+
+    <section class="card">
+      <h2>Deploy Pud</h2>
+      <button onclick="setLocation('Home')">Home</button>
+      <button onclick="setLocation('Office')">Office</button>
+      <button onclick="setLocation('Gym Support')">Gym Support</button>
+      <button onclick="setLocation('Airport')">Airport</button>
+      <button onclick="setLocation('Spain Deployment')">Spain Deployment</button>
+    </section>
+
+    <section class="card">
+      <h2>Pud Quote</h2>
+      <p id="quote">awaiting amphibian insight...</p>
+      <button onclick="generateQuote()">Request Amphibian Insight</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
