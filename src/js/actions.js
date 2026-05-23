@@ -15,7 +15,6 @@ function setLocation(place) {
   const data = locations[place];
 
   document.getElementById("location").textContent = place;
-  document.getElementById("mood").textContent = data.mood;
   document.getElementById("protocol").textContent = data.protocol;
 
   document.getElementById("morale").value = data.morale;
