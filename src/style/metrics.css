@@ -1,0 +1,47 @@
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.metric-row:last-child {
+  border-bottom: none;
+}
+
+.metric-row span {
+  font-weight: bold;
+}
+
+.metric-row strong {
+  font-size: 22px;
+  min-width: 45px;
+  text-align: center;
+}
+
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-wrap input {
+  width: 180px;
+}
+
+@media (max-width: 600px) {
+  .metric-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slider-wrap {
+    width: 100%;
+  }
+
+  .slider-wrap input {
+    width: 100%;
+  }
+}

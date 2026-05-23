@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "Maple Mono NF";
+  src: url("../../assets/fonts/MapleMono-NF-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Maple Mono NF";
+  src: url("../../assets/fonts/MapleMono-NF-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+body {
+  margin: 0;
+  font-family: "Maple Mono NF", sans-serif;
+  background: #c7a27c linear-gradient(180deg, #d2b48c 0%, #b08968 100%);
+  color: #1f2933;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 5px;
+}
+
+.big {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+#quote {
+  font-family: "Maple Mono NF", monospace;
+  background: #ecfeff;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+#achievement {
+  font-size: 24px;
+  font-weight: bold;
+}

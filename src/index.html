@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>The Pud App</title>
-  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/main.css" />
 </head>
 
 <body>
@@ -46,7 +46,7 @@
         <span>Bugs Prevented 🐞</span>
         <div>
           <button onclick="changeMetric('bugs', -1)">-</button>
-          <strong id="bugs">7</strong>
+          <strong id="bugs">0</strong>
           <button onclick="changeMetric('bugs', 1)">+</button>
         </div>
       </div>
@@ -55,7 +55,7 @@
         <span>Meetings Survived 🗓️</span>
         <div>
           <button onclick="changeMetric('meetings', -1)">-</button>
-          <strong id="meetings">3</strong>
+          <strong id="meetings">0</strong>
           <button onclick="changeMetric('meetings', 1)">+</button>
         </div>
       </div>
@@ -63,15 +63,27 @@
       <div class="metric-row">
         <span>Caffeine Exposure ☕️</span>
         <div class="slider-wrap">
-          <input type="range" id="caffeineSlider" min="0" max="100" value="42" oninput="updateCaffeine(this.value)" />
-          <strong><span id="caffeine">42</span>%</strong>
+          <input type="range" id="caffeineSlider" min="0" max="100" value="0" oninput="updateCaffeine(this.value)" />
+          <strong><span id="caffeine">0</span>%</strong>
         </div>
       </div>
 
       <div class="metric-row">
         <span>Pud Approval ✔️</span>
-        <strong><span id="approval">91</span>%</strong>
+        <strong><span id="approval">0</span>%</strong>
       </div>
+
+      <div class="metric-row">
+        <button onclick="resetPudData()">Reset Pud Data</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>📝 Mission Log</h2>
+      <textarea id="missionInput" placeholder="Log today's operations..."></textarea>
+      <button onclick="addMissionLog()">Add Log</button>
+      <button onclick="clearMissionLog()">Clear Logs</button>
+      <ul id="missionLog"></ul>
     </section>
 
     <section class="card">
@@ -81,10 +93,14 @@
     </section>
   </main>
 
-  <script src="js/data.js"></script>
-  <script src="js/state.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/app.js"></script>
+  <script src="./js/data.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/approval.js"></script>
+  <script src="./js/actions.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 
 </html>
