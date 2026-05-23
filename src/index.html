@@ -52,7 +52,7 @@
         <div id="soundControls"></div>
       </section>
 
-      <section class="card">
+      <section class="card slideshow-card">
         <h2>Pud Field Documentation 🖼️</h2>
 
         <img id="pudSlideshow" class="pud-slideshow" src="../assets/images/pud/pud-close.jpg" alt="Pud slideshow" />
@@ -64,6 +64,18 @@
         </div>
       </section>
     </div>
+
+    <section class="card danger-zone">
+      <h2>🚨 Emergency Controls</h2>
+      <div class="danger-buttons">
+        <button class="danger-button" onclick="stopAllSounds()">
+          🛑 Stop Audio
+        </button>
+        <button class="danger-button" onclick="stopPudSlideshow()">
+          ⏹️ Stop Slideshow
+        </button>
+      </div>
+    </section>
 
     <section class="card">
       <h2>Pud Status 📊</h2>
@@ -179,9 +191,12 @@
   <script src="./js/ui.js"></script>
   <script src="./js/approval.js"></script>
   <script src="./js/timer.js"></script>
+  <script src="./js/achievements.js"></script>
+  <script src="./js/sounds.js"></script>
+  <script src="./js/slideshow.js"></script>
+  <script src="./js/loading.js"></script>
   <script src="./js/actions.js"></script>
   <script src="./js/storage.js"></script>
-  <script src="./js/loading.js"></script>
   <script src="./js/app.js"></script>
 </body>
 
