@@ -1,0 +1,14 @@
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 5px;
+  cursor: pointer;
+  background: #7dd3fc;
+  font-weight: bold;
+  font-family: "Maple Mono NF", monospace;
+}
+
+button:hover {
+  background: #38bdf8;
+}
