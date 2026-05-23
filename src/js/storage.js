@@ -10,6 +10,8 @@ function savePudData() {
     missionLogs: missionLogs,
     uptimeSeconds,
     pomodoroSeconds,
+    unlockedAchievements,
+    currentPudImageIndex,
   };
 
   localStorage.setItem("pudData", JSON.stringify(pudData));
@@ -31,6 +33,11 @@ function loadPudData() {
   meetings = pudData.meetings ?? 0;
   caffeine = pudData.caffeine ?? 0;
   weatherBonus = pudData.weatherBonus ?? 0;
+  unlockedAchievements = pudData.unlockedAchievements ?? [];
+  currentPudImageIndex = pudData.currentPudImageIndex ?? 0;
+
+  renderAchievements();
+  renderPudImage();
 
   setLocation(currentLocation);
 
@@ -40,8 +47,8 @@ function loadPudData() {
   document.getElementById("quote").textContent =
     pudData.quote ?? "awaiting amphibian insight...";
 
-    uptimeSeconds = pudData.uptimeSeconds ?? 0;
-    pomodoroSeconds = pudData.pomodoroSeconds ?? 25 * 60;
+  uptimeSeconds = pudData.uptimeSeconds ?? 0;
+  pomodoroSeconds = pudData.pomodoroSeconds ?? 25 * 60;
 
   renderStats();
   updateApproval();

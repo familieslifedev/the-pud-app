@@ -1,0 +1,21 @@
+#soundEnvironment {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  font-family: "Maple Mono NF", monospace;
+}
+
+.sound-row {
+  display: grid;
+  grid-template-columns: 1fr auto 160px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+@media (max-width: 700px) {
+  .sound-row {
+    grid-template-columns: 1fr;
+  }
+}

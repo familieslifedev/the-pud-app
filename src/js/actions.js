@@ -42,6 +42,7 @@ function changeMetric(metric, amount) {
 
   renderStats();
   updateApproval();
+  checkAchievements();
   savePudData();
 }
 
@@ -50,6 +51,7 @@ function updateCaffeine(value) {
 
   renderStats();
   updateApproval();
+  checkAchievements();
   savePudData();
 }
 
@@ -77,7 +79,7 @@ function renderMissionLog() {
   const list = document.getElementById("missionLog");
   list.innerHTML = "";
 
-  missionLogs.forEach(function(log) {
+  missionLogs.forEach(function (log) {
     const item = document.createElement("li");
     item.textContent = `${log.date} — ${log.text}`;
     list.appendChild(item);
