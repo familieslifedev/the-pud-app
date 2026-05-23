@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>The Pud App</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style/style.css" />
 </head>
+
 <body>
   <main class="app">
     <h1>👁️‿👁️ The Pud App</h1>
-    <p>Amphibious Enterprise Morale Monitoring Platform</p>
+    <h2>moist amphibian enterprise software</h2>
 
     <section class="card">
-      <h2>Pud Status</h2>
+      <h2>Pud Status 📊</h2>
       <p><strong>Mood:</strong> <span id="mood">cosy</span></p>
       <p><strong>Location:</strong> <span id="location">Home</span></p>
-      <p><strong>Morale:</strong> <span id="morale">88</span>%</p>
-      <p><strong>Snack Reserves:</strong> <span id="snacks">71</span>%</p>
+      <p><strong>Protocol:</strong> <span id="protocol">domestic puddle stabilisation active</span></p>
+      <div class="stat"><span>Morale</span><progress id="morale" value="88" max="100"></progress></div>
+      <div class="stat"><span>Snacks</span><progress id="snacks" value="71" max="100"></progress></div>
+      <div class="stat"><span>Support</span><progress id="support" value="94" max="100"></progress></div>
+      <div class="stat"><span>Sleepiness</span><progress id="sleepiness" value="42" max="100"></progress></div>
+      <div class="stat"><span>Adventure</span><progress id="adventure" value="39" max="100"></progress></div>
     </section>
 
     <section class="card">
-      <h2>Deploy Pud</h2>
+      <h2>Deploy Pud 🌍</h2>
       <button onclick="setLocation('Home')">Home</button>
       <button onclick="setLocation('Office')">Office</button>
       <button onclick="setLocation('Gym Support')">Gym Support</button>
@@ -28,12 +34,57 @@
     </section>
 
     <section class="card">
-      <h2>Pud Quote</h2>
+      <h2>Pud Quote 💬</h2>
       <p id="quote">awaiting amphibian insight...</p>
       <button onclick="generateQuote()">Request Amphibian Insight</button>
     </section>
+
+    <section class="card">
+      <h2>Operational Metrics 📈</h2>
+
+      <div class="metric-row">
+        <span>Bugs Prevented 🐞</span>
+        <div>
+          <button onclick="changeMetric('bugs', -1)">-</button>
+          <strong id="bugs">7</strong>
+          <button onclick="changeMetric('bugs', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <span>Meetings Survived 🗓️</span>
+        <div>
+          <button onclick="changeMetric('meetings', -1)">-</button>
+          <strong id="meetings">3</strong>
+          <button onclick="changeMetric('meetings', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <span>Caffeine Exposure ☕️</span>
+        <div class="slider-wrap">
+          <input type="range" id="caffeineSlider" min="0" max="100" value="42" oninput="updateCaffeine(this.value)" />
+          <strong><span id="caffeine">42</span>%</strong>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <span>Pud Approval ✔️</span>
+        <strong><span id="approval">91</span>%</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Certification 🏆</h2>
+      <p id="achievement">Chief Wooper Officer</p>
+      <p><strong>Incident ID:</strong> <span id="incident">PUD-0001-HOME</span></p>
+    </section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
 </body>
+
 </html>
