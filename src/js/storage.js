@@ -12,6 +12,10 @@ function savePudData() {
     pomodoroSeconds,
     unlockedAchievements,
     currentPudImageIndex,
+    weatherBonus,
+    weatherStatus: document.getElementById("weatherStatus").textContent,
+    weatherTemp: document.getElementById("weatherTemp").textContent,
+    weatherLocation: document.getElementById("weatherLocation").textContent,
   };
 
   localStorage.setItem("pudData", JSON.stringify(pudData));
@@ -35,6 +39,14 @@ function loadPudData() {
   weatherBonus = pudData.weatherBonus ?? 0;
   unlockedAchievements = pudData.unlockedAchievements ?? [];
   currentPudImageIndex = pudData.currentPudImageIndex ?? 0;
+  weatherBonus = pudData.weatherBonus ?? 0;
+  document.getElementById("weatherBonus").textContent = weatherBonus;
+  document.getElementById("weatherStatus").textContent =
+    pudData.weatherStatus ?? "Not loaded";
+  document.getElementById("weatherTemp").textContent =
+    pudData.weatherTemp ?? "--";
+  document.getElementById("weatherLocation").textContent =
+    pudData.weatherLocation ?? "Unknown";
 
   renderAchievements();
   renderPudImage();
