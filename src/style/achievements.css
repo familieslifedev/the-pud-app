@@ -1,0 +1,19 @@
+#achievementList {
+  list-style: none;
+  padding: 0;
+}
+
+.achievement {
+  padding: 10px;
+  border-radius: 12px;
+  margin: 8px 0;
+}
+
+.achievement.unlocked {
+  background: #dcfce7;
+}
+
+.achievement.locked {
+  background: #f5eadc;
+  opacity: 0.6;
+}

@@ -1,0 +1,70 @@
+const achievementRules = [
+  {
+    id: "first_bug",
+    name: "🐛 First Bug Bonked",
+    condition: function () {
+      return bugs >= 1;
+    }
+  },
+  {
+    id: "bug_intimidator",
+    name: "🐛 Bug Intimidator",
+    condition: function () {
+      return bugs >= 25;
+    }
+  },
+  {
+    id: "meeting_survivor",
+    name: "💼 Meeting Survivor",
+    condition: function () {
+      return meetings >= 1;
+    }
+  },
+  {
+    id: "corporate_survivor",
+    name: "💼 Corporate Survivor",
+    condition: function () {
+      return meetings >= 10;
+    }
+  },
+  {
+    id: "caffeine_hazard",
+    name: "☕ Caffeine Hazard",
+    condition: function () {
+      return caffeine >= 90;
+    }
+  },
+  {
+    id: "one_hour_operator",
+    name: "⏱️ One Hour Operator",
+    condition: function () {
+      return uptimeSeconds >= 3600;
+    }
+  }
+];
+
+function checkAchievements() {
+  achievementRules.forEach(function (achievement) {
+    if (achievement.condition() && !unlockedAchievements.includes(achievement.id)) {
+      unlockedAchievements.push(achievement.id);
+      document.getElementById("achievement").textContent = achievement.name;
+    }
+  });
+
+  renderAchievements();
+}
+
+function renderAchievements() {
+  const list = document.getElementById("achievementList");
+  list.innerHTML = "";
+
+  achievementRules.forEach(function (achievement) {
+    const item = document.createElement("li");
+    const unlocked = unlockedAchievements.includes(achievement.id);
+
+    item.textContent = unlocked ? achievement.name : "🔒 Locked";
+    item.className = unlocked ? "achievement unlocked" : "achievement locked";
+
+    list.appendChild(item);
+  });
+}

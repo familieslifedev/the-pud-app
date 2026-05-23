@@ -28,6 +28,7 @@ function startUptime() {
   uptimeInterval = setInterval(function () {
     uptimeSeconds++;
     renderTimers();
+    checkAchievements();
     savePudData();
   }, 1000);
 }
@@ -56,6 +57,7 @@ function startPomodoro() {
 
     pomodoroSeconds--;
     renderTimers();
+    checkAchievements();
     savePudData();
   }, 1000);
 }

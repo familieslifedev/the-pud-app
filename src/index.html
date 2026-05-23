@@ -26,6 +26,45 @@
     <h1>👁️‿👁️ The Pud App</h1>
     <h2>moist amphibian enterprise software</h2>
 
+    <div class="top-dashboard">
+      <section class="card">
+        <h2>Ambient Mixer 🎧</h2>
+
+        <label for="soundEnvironment">Environment</label>
+
+        <select id="soundEnvironment" onchange="loadSoundEnvironment(this.value)">
+          <option value="">Select ambience...</option>
+          <option value="rainfall">Rainfall</option>
+          <option value="thunderstorm">Thunderstorm</option>
+          <option value="office">Office</option>
+          <option value="forest">Forest</option>
+          <option value="cafe">Cafe</option>
+          <option value="beach">Beach</option>
+          <option value="ocean">Ocean</option>
+          <option value="campfire">Campfire</option>
+          <option value="creek">Creek</option>
+          <option value="garden">Garden</option>
+          <option value="train">Train</option>
+          <option value="noise">Noise</option>
+          <option value="binaural">Binaural</option>
+        </select>
+
+        <div id="soundControls"></div>
+      </section>
+
+      <section class="card">
+        <h2>Pud Field Documentation 🖼️</h2>
+
+        <img id="pudSlideshow" class="pud-slideshow" src="../assets/images/pud/pud-close.jpg" alt="Pud slideshow" />
+
+        <div class="slideshow-buttons">
+          <button onclick="previousPudImage()">Previous</button>
+          <button onclick="nextPudImage()">Next</button>
+          <button onclick="togglePudSlideshow()">Start / Stop</button>
+        </div>
+      </section>
+    </div>
+
     <section class="card">
       <h2>Pud Status 📊</h2>
       <p><strong>Mood:</strong> <span id="mood">cosy</span></p>
@@ -123,7 +162,12 @@
     </section>
 
     <section class="card">
-      <h2>Certification 🏆</h2>
+      <h2>Achievements 🏆</h2>
+      <ul id="achievementList"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Certification 🏷️</h2>
       <p id="achievement">Chief Wooper Officer</p>
       <p><strong>Incident ID:</strong> <span id="incident">PUD-0001-HOME</span></p>
     </section>

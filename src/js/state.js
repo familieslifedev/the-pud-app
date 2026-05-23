@@ -8,3 +8,4 @@ let uptimeSeconds = 0;
 let uptimeInterval = null;
 let pomodoroSeconds = 25 * 60;
 let pomodoroInterval = null;
+let unlockedAchievements = [];
