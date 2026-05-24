@@ -62,6 +62,7 @@ function loadPudData() {
   renderStats();
   renderTimers();
   renderAchievements();
+  updateCertification();
   renderMissionLog();
   renderPudImage();
 
