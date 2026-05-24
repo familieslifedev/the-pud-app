@@ -4,6 +4,10 @@ function finishLoading() {
   const loadingText = document.getElementById("loadingText");
   const loadingProgress = document.getElementById("loadingProgress");
 
+  if (!loadingScreen || !app || !loadingText || !loadingProgress) {
+    return;
+  }
+
   let progress = 0;
 
   const interval = setInterval(function () {
@@ -11,12 +15,12 @@ function finishLoading() {
 
     loadingProgress.style.width = `${progress}%`;
 
-    if (progress >= 50) {
+    if (progress === 50) {
       loadingText.textContent =
         "loading moisture framework...";
     }
 
-    if (progress >= 100) {
+    if (progress === 100) {
       loadingText.textContent =
         "enterprise amphibian systems online.";
 

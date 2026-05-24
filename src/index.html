@@ -27,46 +27,42 @@
     <h2>moist amphibian enterprise software</h2>
 
     <div class="top-dashboard">
-      <section class="card">
+      <section class="card disabled-section" id="audioCard">
         <h2>Ambient Mixer 🎧</h2>
 
-        <label for="soundEnvironment">Environment</label>
-
         <select id="soundEnvironment" onchange="loadSoundEnvironment(this.value)">
-          <option value="">Select ambience...</option>
-          <option value="rainfall">Rainfall ☔️</option>
-          <option value="thunderstorm">Thunderstorm ⛈️</option>
-          <option value="office">Office 🏢</option>
-          <option value="forest">Forest 🌳</option>
-          <option value="cafe">Cafe ☕️</option>
-          <option value="beach">Beach 🏖️</option>
-          <option value="ocean">Ocean 🌊</option>
-          <option value="campfire">Campfire 🔥</option>
-          <option value="creek">Creek 🏞️</option>
-          <option value="garden">Garden 🌱</option>
-          <option value="train">Train 🚄</option>
-          <option value="noise">Noise 🎵</option>
-          <option value="binaural">Binaural 🎧</option>
         </select>
 
+        <p id="audioDisabledMessage" class="disabled-message hidden">
+          ---
+        </p>
+
         <div id="soundControls"></div>
+
+        <button class="danger-button" id="stopAudioButton" onclick="stopAllSounds()">Stop Audio 🔇</button>
       </section>
 
-      <section class="card slideshow-card">
-        <h2>Pud Field Documentation 🖼️</h2>
+      <section class="card" id="slideshowCard">
+        <h2>Pud Field Documentation 📷</h2>
 
-        <img id="pudSlideshow" class="pud-slideshow" src="../assets/images/pud/pud-close.jpg" alt="Pud slideshow" />
+        <p id="slideshowDisabledMessage" class="disabled-message hidden">
+          Pictures are disabled in settings.
+        </p>
 
-        <div class="slideshow-buttons">
-          <button onclick="previousPudImage()">Previous ⏪</button>
-          <button onclick="nextPudImage()">Next ⏩</button>
-          <button onclick="togglePudSlideshow()">Start / Stop ⏯️</button>
+        <div id="slideshowContent">
+          <img id="pudSlideshow" class="pud-slideshow" src="../assets/images/pud/pud-close.jpg" alt="Pud slideshow" />
+
+          <div class="slideshow-buttons">
+            <button onclick="previousPudImage()">Previous ⏪</button>
+            <button onclick="nextPudImage()">Next ⏩</button>
+            <button onclick="togglePudSlideshow()">Start / Stop ⏯️</button>
+          </div>
         </div>
       </section>
     </div>
 
-    <section class="card">
-      <h2>🌦️ Weather</h2>
+    <section class="card" id="weatherCard">
+      <h2>Weather 🌦️</h2>
 
       <input id="weatherSearchInput" type="text" placeholder="Enter city or postcode" />
       <button onclick="searchWeatherLocation()">Search Weather 🔎</button>
@@ -78,23 +74,12 @@
       <button onclick="getWeather()">Use My Location 📍</button>
     </section>
 
-    <section class="card danger-zone">
-      <h2>🚨 Emergency Controls</h2>
-      <div class="danger-buttons">
-        <button class="danger-button" onclick="stopAllSounds()">
-          🛑 Stop Audio
-        </button>
-        <button class="danger-button" onclick="stopPudSlideshow()">
-          ⏹️ Stop Slideshow
-        </button>
-      </div>
-    </section>
-
     <section class="card">
       <h2>Pud Status 📊</h2>
-      <p><strong>Mood:</strong> <span id="mood">cosy</span></p>
-      <p><strong>Location:</strong> <span id="location">Home</span></p>
-      <p><strong>Protocol:</strong> <span id="protocol">domestic puddle stabilisation active</span></p>
+      <p><strong>Mood:</strong> <span id="mood"></span></p>
+      <p><strong>Status:</strong> <span id="descriptor"></span></p>
+      <p><strong>Location:</strong> <span id="location"></span></p>
+      <p><strong>Protocol:</strong> <span id="protocol"></span></p>
       <div class="stat"><span>Morale 😊</span><progress id="morale" value="88" max="100"></progress></div>
       <div class="stat"><span>Snacks 🍪</span><progress id="snacks" value="71" max="100"></progress></div>
       <div class="stat"><span>Support 🤝</span><progress id="support" value="94" max="100"></progress></div>
@@ -157,7 +142,7 @@
     </section>
 
     <section class="card">
-      <h2>📝 Mission Log</h2>
+      <h2>Mission Log 📝</h2>
       <textarea id="missionInput" placeholder="Log today's operations..."></textarea>
       <button onclick="addMissionLog()">Add Log</button>
       <button onclick="clearMissionLog()">Clear Logs</button>
@@ -196,6 +181,69 @@
       <p id="achievement">Chief Wooper Officer</p>
       <p><strong>Incident ID:</strong> <span id="incident">PUD-0001-HOME</span></p>
     </section>
+
+    <section class="card">
+      <h2>Settings ⚙️</h2>
+
+      <div class="settings-grid">
+        <div class="setting-row">
+          <div>
+            <label for="soundsEnabled">Sounds enabled</label>
+            <small>Allows ambience and custom audio playback.</small>
+          </div>
+          <input id="soundsEnabled" type="checkbox" checked onchange="updateSetting('soundsEnabled', this.checked)" />
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <label for="slideshowEnabled">Slideshow enabled</label>
+            <small>Allows Pud field documentation to auto-rotate.</small>
+          </div>
+          <input id="slideshowEnabled" type="checkbox" checked
+            onchange="updateSetting('slideshowEnabled', this.checked)" />
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <label for="weatherEnabled">Weather enabled</label>
+            <small>Allows real weather to affect Pud Approval.</small>
+          </div>
+          <input id="weatherEnabled" type="checkbox" checked onchange="updateSetting('weatherEnabled', this.checked)" />
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <label for="preferredEnvironment">Preferred ambience</label>
+            <small>Default sound environment for Pud operations.</small>
+          </div>
+          <select id="preferredEnvironment" onchange="updateSetting('preferredEnvironment', this.value)">
+            <option value="">None</option>
+            <option value="rainfall">Rainfall ☔️</option>
+            <option value="thunderstorm">Thunderstorm ⛈️</option>
+            <option value="office">Office 🏢</option>
+            <option value="forest">Forest 🌳</option>
+            <option value="cafe">Cafe ☕️</option>
+            <option value="beach">Beach 🏖️</option>
+            <option value="ocean">Ocean 🌊</option>
+            <option value="campfire">Campfire 🔥</option>
+            <option value="creek">Creek 🏞️</option>
+            <option value="garden">Garden 🌱</option>
+            <option value="train">Train 🚆</option>
+            <option value="noise">Noise 🎵</option>
+            <option value="binaural">Binaural 🎧</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <label for="preferredLocation">Preferred weather location</label>
+            <small>Used when searching weather manually.</small>
+          </div>
+          <input id="preferredLocation" type="text" placeholder="e.g. London"
+            onchange="updateSetting('preferredLocation', this.value)" />
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="./js/data.js"></script>
@@ -204,13 +252,15 @@
   <script src="./js/ui.js"></script>
   <script src="./js/approval.js"></script>
   <script src="./js/timer.js"></script>
+  <script src="./js/certifications.js"></script>
   <script src="./js/achievements.js"></script>
   <script src="./js/sounds.js"></script>
   <script src="./js/slideshow.js"></script>
-  <script src="./js/loading.js"></script>
-  <script src="./js/actions.js"></script>
   <script src="./js/weather.js"></script>
+  <script src="./js/settings.js"></script>
+  <script src="./js/actions.js"></script>
   <script src="./js/storage.js"></script>
+  <script src="./js/loading.js"></script>
   <script src="./js/app.js"></script>
 </body>
 

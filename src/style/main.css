@@ -8,6 +8,7 @@
 @import url("./achievements.css");
 @import url("./slideshow.css");
 @import url("./sounds.css");
+@import url("./settings.css");
 
 .hidden {
   display: none !important;
