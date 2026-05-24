@@ -109,21 +109,21 @@ function applyWeatherSettings() {
 
     weatherCard.classList.toggle("disabled-section", !settings.weatherEnabled);
 }
-
 function getSoundEnvironmentOptions() {
     return `
     <option value="">Select ambience...</option>
-    <option value="rainfall">Rainfall</option>
-    <option value="thunderstorm">Thunderstorm</option>
-    <option value="office">Office</option>
-    <option value="forest">Forest</option>
-    <option value="cafe">Cafe</option>
-    <option value="beach">Beach</option>
-    <option value="ocean">Ocean</option>
-    <option value="campfire">Campfire</option>
-    <option value="creek">Creek</option>
-    <option value="garden">Garden</option>
-    <option value="train">Train</option>
-    <option value="noise">Noise</option>
+    <option value="rainfall">Rainfall ☔️</option>
+    <option value="thunderstorm">Thunderstorm ⛈️</option>
+    <option value="office">Office 🏢</option>
+    <option value="forest">Forest 🌳</option>
+    <option value="cafe">Cafe ☕️</option>
+    <option value="beach">Beach 🏖️</option>
+    <option value="ocean">Ocean 🌊</option>
+    <option value="campfire">Campfire 🔥</option>
+    <option value="creek">Creek 🏞️</option>
+    <option value="garden">Garden 🌱</option>
+    <option value="train">Train 🚆</option>
+    <option value="noise">Noise 🎵</option>
+    <option value="binaural">Binaural 🎧</option>
   `;
 }
