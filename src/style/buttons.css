@@ -13,17 +13,6 @@ button:hover {
   background: #38bdf8;
 }
 
-.danger-zone {
-  border: 2px solid #dc2626;
-}
-
-.danger-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 16px;
-}
-
 .danger-button {
   background: #dc2626;
   color: white;

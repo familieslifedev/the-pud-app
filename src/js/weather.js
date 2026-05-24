@@ -1,4 +1,10 @@
 function getWeather() {
+    if (!settings.weatherEnabled) {
+        document.getElementById("weatherStatus").textContent =
+            "Weather disabled in settings.";
+        return;
+    }
+
     if (!navigator.geolocation) {
         document.getElementById("weatherStatus").textContent =
             "Geolocation not supported.";
@@ -99,6 +105,12 @@ function applyWeatherBonus(weatherCode, precipitation, temperature) {
 }
 
 async function searchWeatherLocation() {
+    if (!settings.weatherEnabled) {
+        document.getElementById("weatherStatus").textContent =
+            "Weather disabled in settings.";
+        return;
+    }
+
     const query = document.getElementById("weatherSearchInput").value.trim();
 
     if (query === "") {

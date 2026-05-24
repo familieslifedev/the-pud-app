@@ -1,2 +1,3 @@
 loadPudData();
+applySettings();
 finishLoading();

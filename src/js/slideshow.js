@@ -38,6 +38,7 @@ function previousPudImage() {
 }
 
 function togglePudSlideshow() {
+  if (!settings.slideshowEnabled) return;
   if (slideshowInterval !== null) {
     clearInterval(slideshowInterval);
     slideshowInterval = null;

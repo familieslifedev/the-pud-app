@@ -18,6 +18,7 @@ let activeSounds = {};
 let customSound = null;
 
 function loadSoundEnvironment(environment) {
+  if (!settings.soundsEnabled) return;
   stopAllSounds();
 
   const controls = document.getElementById("soundControls");
@@ -48,6 +49,7 @@ function loadSoundEnvironment(environment) {
 }
 
 function toggleSound(file) {
+  if (!settings.soundsEnabled) return;
   const audio = activeSounds[file];
 
   if (!audio) return;
@@ -102,6 +104,7 @@ function loadCustomSound(input) {
 }
 
 function toggleCustomSound() {
+  if (!settings.soundsEnabled) return;
   if (!customSound) return;
 
   if (customSound.paused) {
