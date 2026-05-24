@@ -28,22 +28,22 @@
 
     <div class="top-dashboard">
       <section class="card disabled-section" id="audioCard">
-        <h2>🎧 Ambient Mixer</h2>
+        <h2>Ambient Mixer 🎧</h2>
 
         <select id="soundEnvironment" onchange="loadSoundEnvironment(this.value)">
           <option value="">Select ambience...</option>
-          <option value="rainfall">Rainfall</option>
-          <option value="thunderstorm">Thunderstorm</option>
-          <option value="office">Office</option>
-          <option value="forest">Forest</option>
-          <option value="cafe">Cafe</option>
-          <option value="beach">Beach</option>
-          <option value="ocean">Ocean</option>
-          <option value="campfire">Campfire</option>
-          <option value="creek">Creek</option>
-          <option value="garden">Garden</option>
-          <option value="train">Train</option>
-          <option value="noise">Noise</option>
+          <option value="rainfall">Rainfall ☔️</option>
+          <option value="thunderstorm">Thunderstorm ⛈️</option>
+          <option value="office">Office 🏢</option>
+          <option value="forest">Forest 🌳</option>
+          <option value="cafe">Cafe ☕️</option>
+          <option value="beach">Beach 🏖️</option>
+          <option value="ocean">Ocean 🌊</option>
+          <option value="campfire">Campfire 🔥</option>
+          <option value="creek">Creek 🏞️</option>
+          <option value="garden">Garden 🌱</option>
+          <option value="train">Train 🚆</option>
+          <option value="noise">Noise 🎵</option>
         </select>
 
         <p id="audioDisabledMessage" class="disabled-message hidden">
@@ -56,7 +56,7 @@
       </section>
 
       <section class="card" id="slideshowCard">
-        <h2>🖼️ Pud Field Documentation</h2>
+        <h2>Pud Field Documentation 📷</h2>
 
         <p id="slideshowDisabledMessage" class="disabled-message hidden">
           Pictures are disabled in settings.
@@ -66,16 +66,16 @@
           <img id="pudSlideshow" class="pud-slideshow" src="../assets/images/pud/pud-close.jpg" alt="Pud slideshow" />
 
           <div class="slideshow-buttons">
-            <button onclick="previousPudImage()">Previous</button>
-            <button onclick="nextPudImage()">Next</button>
-            <button onclick="togglePudSlideshow()">Start / Stop</button>
+            <button onclick="previousPudImage()">Previous ⏪</button>
+            <button onclick="nextPudImage()">Next ⏩</button>
+            <button onclick="togglePudSlideshow()">Start / Stop ⏯️</button>
           </div>
         </div>
       </section>
     </div>
 
     <section class="card" id="weatherCard">
-      <h2>🌦️ Weather</h2>
+      <h2>Weather 🌦️</h2>
 
       <input id="weatherSearchInput" type="text" placeholder="Enter city or postcode" />
       <button onclick="searchWeatherLocation()">Search Weather 🔎</button>
@@ -154,7 +154,7 @@
     </section>
 
     <section class="card">
-      <h2>📝 Mission Log</h2>
+      <h2>Mission Log 📝</h2>
       <textarea id="missionInput" placeholder="Log today's operations..."></textarea>
       <button onclick="addMissionLog()">Add Log</button>
       <button onclick="clearMissionLog()">Clear Logs</button>
@@ -195,7 +195,7 @@
     </section>
 
     <section class="card">
-      <h2>⚙️ Settings</h2>
+      <h2>Settings ⚙️</h2>
 
       <div class="settings-grid">
         <div class="setting-row">
@@ -230,18 +230,18 @@
           </div>
           <select id="preferredEnvironment" onchange="updateSetting('preferredEnvironment', this.value)">
             <option value="">None</option>
-            <option value="rainfall">Rainfall</option>
-            <option value="thunderstorm">Thunderstorm</option>
-            <option value="office">Office</option>
-            <option value="forest">Forest</option>
-            <option value="cafe">Cafe</option>
-            <option value="beach">Beach</option>
-            <option value="ocean">Ocean</option>
-            <option value="campfire">Campfire</option>
-            <option value="creek">Creek</option>
-            <option value="garden">Garden</option>
-            <option value="train">Train</option>
-            <option value="noise">Noise</option>
+            <option value="rainfall">Rainfall ☔️</option>
+            <option value="thunderstorm">Thunderstorm ⛈️</option>
+            <option value="office">Office 🏢</option>
+            <option value="forest">Forest 🌳</option>
+            <option value="cafe">Cafe ☕️</option>
+            <option value="beach">Beach 🏖️</option>
+            <option value="ocean">Ocean 🌊</option>
+            <option value="campfire">Campfire 🔥</option>
+            <option value="creek">Creek 🏞️</option>
+            <option value="garden">Garden 🌱</option>
+            <option value="train">Train 🚆</option>
+            <option value="noise">Noise 🎵</option>
           </select>
         </div>
 
