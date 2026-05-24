@@ -4,18 +4,25 @@ function savePudData() {
     bugs,
     meetings,
     caffeine,
+    approval,
+
     weatherBonus,
-    achievement: document.getElementById("achievement").textContent,
-    quote: document.getElementById("quote").textContent,
-    missionLogs: missionLogs,
+    weatherStatus: getText("weatherStatus"),
+    weatherTemp: getText("weatherTemp"),
+    weatherLocation: getText("weatherLocation"),
+
+    quote: getText("quote"),
+    achievement: getText("achievement"),
+    unlockedAchievements,
+
+    missionLogs,
+
     uptimeSeconds,
     pomodoroSeconds,
-    unlockedAchievements,
+
     currentPudImageIndex,
-    weatherBonus,
-    weatherStatus: document.getElementById("weatherStatus").textContent,
-    weatherTemp: document.getElementById("weatherTemp").textContent,
-    weatherLocation: document.getElementById("weatherLocation").textContent,
+
+    settings
   };
 
   localStorage.setItem("pudData", JSON.stringify(pudData));
@@ -25,8 +32,9 @@ function loadPudData() {
   const savedData = localStorage.getItem("pudData");
 
   if (savedData === null) {
-    setLocation(currentLocation);
-    updateCaffeine(caffeine);
+    loadDefaultPudData();
+    loadSettings();
+    applySettings();
     return;
   }
 
@@ -36,33 +44,62 @@ function loadPudData() {
   bugs = pudData.bugs ?? 0;
   meetings = pudData.meetings ?? 0;
   caffeine = pudData.caffeine ?? 0;
+  approval = pudData.approval ?? 0;
+
   weatherBonus = pudData.weatherBonus ?? 0;
+
   unlockedAchievements = pudData.unlockedAchievements ?? [];
-  currentPudImageIndex = pudData.currentPudImageIndex ?? 0;
-  weatherBonus = pudData.weatherBonus ?? 0;
-  document.getElementById("weatherBonus").textContent = weatherBonus;
-  document.getElementById("weatherStatus").textContent =
-    pudData.weatherStatus ?? "Not loaded";
-  document.getElementById("weatherTemp").textContent =
-    pudData.weatherTemp ?? "--";
-  document.getElementById("weatherLocation").textContent =
-    pudData.weatherLocation ?? "Unknown";
-
-  renderAchievements();
-  renderPudImage();
-
-  setLocation(currentLocation);
-
-  document.getElementById("achievement").textContent =
-    pudData.achievement ?? "Chief Wooper Officer";
-
-  document.getElementById("quote").textContent =
-    pudData.quote ?? "awaiting amphibian insight...";
+  missionLogs = pudData.missionLogs ?? [];
 
   uptimeSeconds = pudData.uptimeSeconds ?? 0;
   pomodoroSeconds = pudData.pomodoroSeconds ?? 25 * 60;
 
+  currentPudImageIndex = pudData.currentPudImageIndex ?? 0;
+
+  loadSettings(pudData.settings ?? {});
+
+  setLocation(currentLocation);
   renderStats();
-  updateApproval();
   renderTimers();
+  renderAchievements();
+  updateCertification();
+  renderMissionLog();
+  renderPudImage();
+
+  setText("weatherBonus", weatherBonus);
+  setText("weatherStatus", pudData.weatherStatus ?? "Not loaded");
+  setText("weatherTemp", pudData.weatherTemp ?? "--");
+  setText("weatherLocation", pudData.weatherLocation ?? "Unknown");
+
+  setText("quote", pudData.quote ?? "awaiting amphibian insight...");
+  setText("achievement", pudData.achievement ?? "👁️ Chief Wooper Officer");
+
+  updateCaffeine(caffeine);
+  updateApproval();
+  applySettings();
+}
+
+function loadDefaultPudData() {
+  setLocation(currentLocation);
+  updateCaffeine(caffeine);
+  renderStats();
+  renderTimers();
+  renderAchievements();
+  renderMissionLog();
+  renderPudImage();
+  updateApproval();
+}
+
+function getText(id) {
+  const element = document.getElementById(id);
+  return element ? element.textContent : "";
+}
+
+function setText(id, value) {
+  const element = document.getElementById(id);
+
+  if (!element) {
+    return;
+  }
+  element.textContent = value;
 }

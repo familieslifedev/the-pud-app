@@ -10,3 +10,4 @@ let uptimeInterval = null;
 let pomodoroSeconds = 25 * 60;
 let pomodoroInterval = null;
 let unlockedAchievements = [];
+let currentSoundEnvironment = "";

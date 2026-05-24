@@ -1,13 +1,23 @@
 function updateIncidentId() {
+  const incident = document.getElementById("incident");
+  if (!incident) return;
   const number = randomNumber(1000, 9999);
-  const cleanLocation = currentLocation.toUpperCase().replaceAll(" ", "-");
+  const cleanLocation = currentLocation
+    .toUpperCase()
+    .replaceAll(" ", "-");
 
-  document.getElementById("incident").textContent = `PUD-${number}-${cleanLocation}`;
+  incident.textContent = `PUD-${number}-${cleanLocation}`;
 }
 
 function renderStats() {
-  document.getElementById("bugs").textContent = bugs;
-  document.getElementById("meetings").textContent = meetings;
-  document.getElementById("caffeine").textContent = caffeine;
-  document.getElementById("caffeineSlider").value = caffeine;
+  setText("bugs", bugs);
+  setText("meetings", meetings);
+  setText("caffeine", caffeine);
+
+  const caffeineSlider =
+    document.getElementById("caffeineSlider");
+
+  if (caffeineSlider) {
+    caffeineSlider.value = caffeine;
+  }
 }

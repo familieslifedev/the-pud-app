@@ -27,7 +27,7 @@ textarea {
   border: none;
   border-radius: 14px;
   padding: 12px;
-  font-family: "Maple Mono", monospace;
+  font-family: "Maple Mono NF", monospace;
   resize: vertical;
   box-sizing: border-box;
 }

@@ -18,8 +18,12 @@ function formatPomodoro(seconds) {
 }
 
 function renderTimers() {
-  document.getElementById("uptimeDisplay").textContent = formatTime(uptimeSeconds);
-  document.getElementById("pomodoroDisplay").textContent = formatPomodoro(pomodoroSeconds);
+  const uptimeDisplay = document.getElementById("uptimeDisplay");
+  const pomodoroDisplay = document.getElementById("pomodoroDisplay");
+
+  if (uptimeDisplay) { uptimeDisplay.textContent = formatTime(uptimeSeconds); }
+
+  if (pomodoroDisplay) { pomodoroDisplay.textContent = formatPomodoro(pomodoroSeconds); }
 }
 
 function startUptime() {
@@ -51,6 +55,8 @@ function startPomodoro() {
   pomodoroInterval = setInterval(function () {
     if (pomodoroSeconds <= 0) {
       pausePomodoro();
+      checkAchievements();
+      savePudData();
       alert("🍅 Pud Pomodoro complete. Snack acquisition recommended.");
       return;
     }

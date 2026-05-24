@@ -46,7 +46,7 @@ const achievementRules = [
     id: "moisture_maxxer",
     name: "🏅 Moisture Maxxer",
     condition: function () {
-      return approval >= 100;
+      return approval === 100;
     }
   }
 ];
@@ -55,15 +55,16 @@ function checkAchievements() {
   achievementRules.forEach(function (achievement) {
     if (achievement.condition() && !unlockedAchievements.includes(achievement.id)) {
       unlockedAchievements.push(achievement.id);
-      document.getElementById("achievement").textContent = achievement.name;
     }
   });
 
   renderAchievements();
+  updateCertification();
 }
 
 function renderAchievements() {
   const list = document.getElementById("achievementList");
+  if (!list) return;
   list.innerHTML = "";
 
   achievementRules.forEach(function (achievement) {

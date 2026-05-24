@@ -1,11 +1,11 @@
 function generateQuote() {
   const quote = quotes[randomNumber(0, quotes.length - 1)];
-  const achievement = achievements[randomNumber(0, achievements.length - 1)];
 
   document.getElementById("quote").textContent = `“${quote}”`;
   document.getElementById("achievement").textContent = achievement;
 
   updateApproval();
+  checkAchievements();
   updateIncidentId();
   savePudData();
 }
@@ -16,7 +16,7 @@ function setLocation(place) {
 
   document.getElementById("location").textContent = place;
   document.getElementById("protocol").textContent = data.protocol;
-
+  document.getElementById("descriptor").textContent = data.descriptor;
   document.getElementById("morale").value = data.morale;
   document.getElementById("snacks").value = data.snacks;
   document.getElementById("support").value = data.support;
@@ -76,6 +76,7 @@ function addMissionLog() {
 
 function renderMissionLog() {
   const list = document.getElementById("missionLog");
+  if (!list) return;
   list.innerHTML = "";
 
   missionLogs.forEach(function (log) {
