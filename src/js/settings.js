@@ -75,7 +75,7 @@ function applyAudioSettings() {
         stopAudioButton.disabled = false;
     }
 
-    if (settings.preferredEnvironment) {
+    if (settings.preferredEnvironment && currentSoundEnvironment !== settings.preferredEnvironment) {
         loadSoundEnvironment(settings.preferredEnvironment);
     }
 }

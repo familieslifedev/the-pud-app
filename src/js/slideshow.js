@@ -14,7 +14,11 @@ let currentPudImageIndex = 0;
 let slideshowInterval = null;
 
 function renderPudImage() {
-  document.getElementById("pudSlideshow").src = pudImages[currentPudImageIndex];
+  const image = document.getElementById("pudSlideshow");
+
+  if (!image) return;
+
+  image.src = pudImages[currentPudImageIndex];
 }
 
 function nextPudImage() {
@@ -25,6 +29,7 @@ function nextPudImage() {
   }
 
   renderPudImage();
+  savePudData();
 }
 
 function previousPudImage() {
@@ -35,6 +40,7 @@ function previousPudImage() {
   }
 
   renderPudImage();
+  savePudData();
 }
 
 function togglePudSlideshow() {

@@ -19,6 +19,7 @@ let customSound = null;
 
 function loadSoundEnvironment(environment) {
   if (!settings.soundsEnabled) return;
+  currentSoundEnvironment = environment;
   stopAllSounds();
 
   const controls = document.getElementById("soundControls");

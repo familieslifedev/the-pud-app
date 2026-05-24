@@ -119,6 +119,9 @@ async function searchWeatherLocation() {
         return;
     }
 
+    settings.preferredLocation = query;
+    savePudData();
+
     document.getElementById("weatherStatus").textContent =
         "Searching location...";
 

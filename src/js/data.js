@@ -11,7 +11,7 @@ const quotes = [
   "mud-based productivity forecast: strong."
 ];
 
-const achievements = [
+const certifications = [
   "Certified Puddle Handler",
   "Snack Logistics Intern",
   "Meeting Survivalist",
@@ -22,7 +22,7 @@ const achievements = [
 
 const locations = {
   "Home": {
-    mood: "cosy",
+    descriptor: "cosy",
     protocol: "domestic puddle stabilisation active",
     morale: 88,
     snacks: 71,
@@ -31,7 +31,7 @@ const locations = {
     adventure: 39
   },
   "Office": {
-    mood: "professional goblin",
+    descriptor: "professional goblin",
     protocol: "enterprise support operations active",
     morale: 74,
     snacks: 43,
@@ -40,7 +40,7 @@ const locations = {
     adventure: 21
   },
   "Gym Support": {
-    mood: "sweaty but brave",
+    descriptor: "sweaty but brave",
     protocol: "motivational amphibian protocols engaged",
     morale: 81,
     snacks: 35,
@@ -49,7 +49,7 @@ const locations = {
     adventure: 76
   },
   "Airport": {
-    mood: "suspicious of luggage",
+    descriptor: "suspicious of luggage",
     protocol: "travel anxiety mitigation squad deployed",
     morale: 68,
     snacks: 24,
@@ -58,7 +58,7 @@ const locations = {
     adventure: 88
   },
   "Spain Deployment": {
-    mood: "sun-dried legend",
+    descriptor: "sun-dried legend",
     protocol: "Mediterranean leisure protocols engaged :)",
     morale: 96,
     snacks: 64,

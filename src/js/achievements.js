@@ -64,6 +64,7 @@ function checkAchievements() {
 
 function renderAchievements() {
   const list = document.getElementById("achievementList");
+  if (!list) return;
   list.innerHTML = "";
 
   achievementRules.forEach(function (achievement) {

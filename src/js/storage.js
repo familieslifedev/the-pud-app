@@ -32,10 +32,8 @@ function loadPudData() {
   const savedData = localStorage.getItem("pudData");
 
   if (savedData === null) {
-    setLocation(currentLocation);
-    updateCaffeine(caffeine);
+    loadDefaultPudData();
     loadSettings();
-    renderPudImage();
     applySettings();
     return;
   }
@@ -77,8 +75,6 @@ function loadPudData() {
 
   updateCaffeine(caffeine);
   updateApproval();
-  loadSettings(pudData.settings ?? {});
-  renderPudImage();
   applySettings();
 }
 
