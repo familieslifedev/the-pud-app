@@ -1,4 +1,13 @@
-let settings = {
+import { state } from "./state.js";
+import {
+    stopAllSounds,
+    loadSoundEnvironment
+} from "./sounds.js";
+
+import { stopPudSlideshow } from "./slideshow.js";
+import { savePudData } from "./storage.js";
+
+export let settings = {
     soundsEnabled: true,
     slideshowEnabled: true,
     weatherEnabled: true,
@@ -6,41 +15,67 @@ let settings = {
     preferredLocation: ""
 };
 
-function updateSetting(key, value) {
+export function updateSetting(key, value) {
     settings[key] = value;
+
     applySettings();
     savePudData();
 }
 
-function loadSettings(savedSettings = {}) {
+export function loadSettings(savedSettings = {}) {
     settings = {
         ...settings,
         ...savedSettings
     };
 
-    document.getElementById("soundsEnabled").checked = settings.soundsEnabled;
-    document.getElementById("slideshowEnabled").checked = settings.slideshowEnabled;
-    document.getElementById("weatherEnabled").checked = settings.weatherEnabled;
-    document.getElementById("preferredEnvironment").value = settings.preferredEnvironment;
-    document.getElementById("preferredLocation").value = settings.preferredLocation;
+    document.getElementById("soundsEnabled").checked =
+        settings.soundsEnabled;
+
+    document.getElementById("slideshowEnabled").checked =
+        settings.slideshowEnabled;
+
+    document.getElementById("weatherEnabled").checked =
+        settings.weatherEnabled;
+
+    document.getElementById("preferredEnvironment").value =
+        settings.preferredEnvironment;
+
+    document.getElementById("preferredLocation").value =
+        settings.preferredLocation;
 
     applySettings();
 }
 
-function applySettings() {
+export function applySettings() {
     applyAudioSettings();
     applySlideshowSettings();
     applyWeatherSettings();
 }
 
 function applyAudioSettings() {
-    const audioCard = document.getElementById("audioCard");
-    const selector = document.getElementById("soundEnvironment");
-    const soundControls = document.getElementById("soundControls");
-    const stopAudioButton = document.getElementById("stopAudioButton");
-    const message = document.getElementById("audioDisabledMessage");
+    const audioCard =
+        document.getElementById("audioCard");
 
-    if (!audioCard || !selector || !soundControls || !message) return;
+    const selector =
+        document.getElementById("soundEnvironment");
+
+    const soundControls =
+        document.getElementById("soundControls");
+
+    const stopAudioButton =
+        document.getElementById("stopAudioButton");
+
+    const message =
+        document.getElementById("audioDisabledMessage");
+
+    if (
+        !audioCard ||
+        !selector ||
+        !soundControls ||
+        !message
+    ) {
+        return;
+    }
 
     if (!settings.soundsEnabled) {
         stopAllSounds();
@@ -50,10 +85,12 @@ function applyAudioSettings() {
         selector.innerHTML = `
       <option value="">Audio is disabled in settings</option>
     `;
+
         selector.value = "";
         selector.disabled = true;
 
         soundControls.innerHTML = "";
+
         message.classList.remove("hidden");
 
         if (stopAudioButton) {
@@ -66,8 +103,12 @@ function applyAudioSettings() {
     audioCard.classList.remove("disabled-section");
 
     selector.disabled = false;
-    selector.innerHTML = getSoundEnvironmentOptions();
-    selector.value = settings.preferredEnvironment ?? "";
+
+    selector.innerHTML =
+        getSoundEnvironmentOptions();
+
+    selector.value =
+        settings.preferredEnvironment ?? "";
 
     message.classList.add("hidden");
 
@@ -75,40 +116,66 @@ function applyAudioSettings() {
         stopAudioButton.disabled = false;
     }
 
-    if (settings.preferredEnvironment && currentSoundEnvironment !== settings.preferredEnvironment) {
-        loadSoundEnvironment(settings.preferredEnvironment);
+    if (
+        settings.preferredEnvironment &&
+        state.currentSoundEnvironment !==
+        settings.preferredEnvironment
+    ) {
+        loadSoundEnvironment(
+            settings.preferredEnvironment
+        );
     }
 }
 
 function applySlideshowSettings() {
-    const slideshowCard = document.getElementById("slideshowCard");
-    const slideshowContent = document.getElementById("slideshowContent");
-    const message = document.getElementById("slideshowDisabledMessage");
+    const slideshowCard =
+        document.getElementById("slideshowCard");
 
-    if (!slideshowCard || !slideshowContent || !message) return;
+    const slideshowContent =
+        document.getElementById("slideshowContent");
+
+    const message =
+        document.getElementById("slideshowDisabledMessage");
+
+    if (
+        !slideshowCard ||
+        !slideshowContent ||
+        !message
+    ) {
+        return;
+    }
 
     if (!settings.slideshowEnabled) {
         stopPudSlideshow();
 
         slideshowCard.classList.add("disabled-section");
+
         slideshowContent.classList.add("hidden");
+
         message.classList.remove("hidden");
 
         return;
     }
 
     slideshowCard.classList.remove("disabled-section");
+
     slideshowContent.classList.remove("hidden");
+
     message.classList.add("hidden");
 }
 
 function applyWeatherSettings() {
-    const weatherCard = document.getElementById("weatherCard");
+    const weatherCard =
+        document.getElementById("weatherCard");
 
     if (!weatherCard) return;
 
-    weatherCard.classList.toggle("disabled-section", !settings.weatherEnabled);
+    weatherCard.classList.toggle(
+        "disabled-section",
+        !settings.weatherEnabled
+    );
 }
+
 function getSoundEnvironmentOptions() {
     return `
     <option value="">Select ambience...</option>

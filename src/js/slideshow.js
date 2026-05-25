@@ -1,4 +1,8 @@
-const pudImages = [
+import { state } from "./state.js";
+import { settings } from "./settings.js";
+import { savePudData } from "./storage.js";
+
+export const pudImages = [
   "../assets/images/pud/pud-close.jpg",
   "../assets/images/pud/pud-gaming.jpg",
   "../assets/images/pud/pud-home-desk.jpg",
@@ -10,51 +14,49 @@ const pudImages = [
   "../assets/images/pud/pud-window.jpg"
 ];
 
-let currentPudImageIndex = 0;
-let slideshowInterval = null;
-
-function renderPudImage() {
+export function renderPudImage() {
   const image = document.getElementById("pudSlideshow");
 
   if (!image) return;
 
-  image.src = pudImages[currentPudImageIndex];
+  image.src = pudImages[state.currentPudImageIndex];
 }
 
-function nextPudImage() {
-  currentPudImageIndex++;
+export function nextPudImage() {
+  state.currentPudImageIndex++;
 
-  if (currentPudImageIndex >= pudImages.length) {
-    currentPudImageIndex = 0;
+  if (state.currentPudImageIndex >= pudImages.length) {
+    state.currentPudImageIndex = 0;
   }
 
   renderPudImage();
   savePudData();
 }
 
-function previousPudImage() {
-  currentPudImageIndex--;
+export function previousPudImage() {
+  state.currentPudImageIndex--;
 
-  if (currentPudImageIndex < 0) {
-    currentPudImageIndex = pudImages.length - 1;
+  if (state.currentPudImageIndex < 0) {
+    state.currentPudImageIndex = pudImages.length - 1;
   }
 
   renderPudImage();
   savePudData();
 }
 
-function togglePudSlideshow() {
+export function togglePudSlideshow() {
   if (!settings.slideshowEnabled) return;
-  if (slideshowInterval !== null) {
-    clearInterval(slideshowInterval);
-    slideshowInterval = null;
+
+  if (state.slideshowInterval !== null) {
+    clearInterval(state.slideshowInterval);
+    state.slideshowInterval = null;
     return;
   }
 
-  slideshowInterval = setInterval(nextPudImage, 4000);
+  state.slideshowInterval = setInterval(nextPudImage, 4000);
 }
 
-function stopPudSlideshow() {
-  clearInterval(slideshowInterval);
-  slideshowInterval = null;
+export function stopPudSlideshow() {
+  clearInterval(state.slideshowInterval);
+  state.slideshowInterval = null;
 }

@@ -1,5 +1,8 @@
-function updateApproval() {
-  const locationData = locations[currentLocation];
+import { locations } from "./data.js";
+import { state } from "./state.js";
+
+export function updateApproval() {
+  const locationData = locations[state.currentLocation];
 
   let score = 0;
 
@@ -8,17 +11,17 @@ function updateApproval() {
   score += locationData.support * 0.20;
   score += locationData.adventure * 0.10;
 
-  score += Math.min(bugs, 25) * 0.9;
-  score += Math.min(meetings, 15) * 0.7;
+  score += Math.min(state.bugs, 25) * 0.9;
+  score += Math.min(state.meetings, 15) * 0.7;
 
-  score += weatherBonus;
+  score += state.weatherBonus;
 
   // caffeine logic
-  if (caffeine < 15) {
+  if (state.caffeine < 15) {
     score -= 4;
-  } else if (caffeine <= 70) {
+  } else if (state.caffeine <= 70) {
     score += 8;
-  } else if (caffeine <= 90) {
+  } else if (state.caffeine <= 90) {
     score += 2;
   } else {
     score -= 6;
@@ -33,13 +36,15 @@ function updateApproval() {
   score += 10;
 
   score = Math.round(Math.max(0, Math.min(100, score)));
-  approval = score;
+
+  state.approval = score;
+
   document.getElementById("approval").textContent = score;
 
   updateApprovalMood(score);
 }
 
-function updateApprovalMood(score) {
+export function updateApprovalMood(score) {
   let mood = "neutral dampness";
 
   if (score >= 90) {
@@ -55,5 +60,6 @@ function updateApprovalMood(score) {
   } else {
     mood = "critical puddle instability";
   }
+
   document.getElementById("mood").textContent = mood;
 }
