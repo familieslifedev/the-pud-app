@@ -1,4 +1,4 @@
-function finishLoading() {
+export function finishLoading() {
   const loadingScreen = document.getElementById("loadingScreen");
   const app = document.getElementById("app");
   const loadingText = document.getElementById("loadingText");

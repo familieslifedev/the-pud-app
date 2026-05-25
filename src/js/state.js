@@ -1,13 +1,28 @@
-let currentLocation = "Home";
-let bugs = 0;
-let meetings = 0;
-let caffeine = 0;
-let weatherBonus = 0;
-let approval = 0;
-let missionLogs = [];
-let uptimeSeconds = 0;
-let uptimeInterval = null;
-let pomodoroSeconds = 25 * 60;
-let pomodoroInterval = null;
-let unlockedAchievements = [];
-let currentSoundEnvironment = "";
+export const state = {
+    currentLocation: "Home",
+
+    bugs: 0,
+    meetings: 0,
+    caffeine: 0,
+
+    weatherBonus: 0,
+    approval: 0,
+
+    missionLogs: [],
+
+    uptimeSeconds: 0,
+    uptimeInterval: null,
+
+    pomodoroSeconds: 25 * 60,
+    pomodoroInterval: null,
+
+    unlockedAchievements: [],
+
+    currentSoundEnvironment: "",
+
+    currentPudImageIndex: 0,
+    slideshowInterval: null,
+
+    activeSounds: {},
+    customSound: null
+};
