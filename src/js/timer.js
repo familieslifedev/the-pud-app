@@ -1,4 +1,8 @@
-function formatTime(seconds) {
+import { state } from "./state.js";
+import { checkAchievements } from "./achievements.js";
+import { savePudData } from "./storage.js";
+
+export function formatTime(seconds) {
   const hrs = Math.floor(seconds / 3600);
   const mins = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
@@ -10,50 +14,54 @@ function formatTime(seconds) {
   ].join(":");
 }
 
-function formatPomodoro(seconds) {
+export function formatPomodoro(seconds) {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
 
   return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
-function renderTimers() {
+export function renderTimers() {
   const uptimeDisplay = document.getElementById("uptimeDisplay");
   const pomodoroDisplay = document.getElementById("pomodoroDisplay");
 
-  if (uptimeDisplay) { uptimeDisplay.textContent = formatTime(uptimeSeconds); }
+  if (uptimeDisplay) {
+    uptimeDisplay.textContent = formatTime(state.uptimeSeconds);
+  }
 
-  if (pomodoroDisplay) { pomodoroDisplay.textContent = formatPomodoro(pomodoroSeconds); }
+  if (pomodoroDisplay) {
+    pomodoroDisplay.textContent = formatPomodoro(state.pomodoroSeconds);
+  }
 }
 
-function startUptime() {
-  if (uptimeInterval !== null) return;
+export function startUptime() {
+  if (state.uptimeInterval !== null) return;
 
-  uptimeInterval = setInterval(function () {
-    uptimeSeconds++;
+  state.uptimeInterval = setInterval(function () {
+    state.uptimeSeconds++;
     renderTimers();
     checkAchievements();
     savePudData();
   }, 1000);
 }
 
-function pauseUptime() {
-  clearInterval(uptimeInterval);
-  uptimeInterval = null;
+export function pauseUptime() {
+  clearInterval(state.uptimeInterval);
+  state.uptimeInterval = null;
 }
 
-function resetUptime() {
+export function resetUptime() {
   pauseUptime();
-  uptimeSeconds = 0;
+  state.uptimeSeconds = 0;
   renderTimers();
   savePudData();
 }
 
-function startPomodoro() {
-  if (pomodoroInterval !== null) return;
+export function startPomodoro() {
+  if (state.pomodoroInterval !== null) return;
 
-  pomodoroInterval = setInterval(function () {
-    if (pomodoroSeconds <= 0) {
+  state.pomodoroInterval = setInterval(function () {
+    if (state.pomodoroSeconds <= 0) {
       pausePomodoro();
       checkAchievements();
       savePudData();
@@ -61,21 +69,21 @@ function startPomodoro() {
       return;
     }
 
-    pomodoroSeconds--;
+    state.pomodoroSeconds--;
     renderTimers();
     checkAchievements();
     savePudData();
   }, 1000);
 }
 
-function pausePomodoro() {
-  clearInterval(pomodoroInterval);
-  pomodoroInterval = null;
+export function pausePomodoro() {
+  clearInterval(state.pomodoroInterval);
+  state.pomodoroInterval = null;
 }
 
-function resetPomodoro() {
+export function resetPomodoro() {
   pausePomodoro();
-  pomodoroSeconds = 25 * 60;
+  state.pomodoroSeconds = 25 * 60;
   renderTimers();
   savePudData();
 }

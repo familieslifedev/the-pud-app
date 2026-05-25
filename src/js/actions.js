@@ -1,8 +1,15 @@
-function generateQuote() {
+import { quotes, locations } from "./data.js";
+import { state } from "./state.js";
+import { randomNumber } from "./utils.js";
+import { renderStats, updateIncidentId } from "./ui.js";
+import { updateApproval } from "./approval.js";
+import { checkAchievements } from "./achievements.js";
+import { savePudData } from "./storage.js";
+
+export function generateQuote() {
   const quote = quotes[randomNumber(0, quotes.length - 1)];
 
   document.getElementById("quote").textContent = `“${quote}”`;
-  document.getElementById("achievement").textContent = achievement;
 
   updateApproval();
   checkAchievements();
@@ -10,8 +17,8 @@ function generateQuote() {
   savePudData();
 }
 
-function setLocation(place) {
-  currentLocation = place;
+export function setLocation(place) {
+  state.currentLocation = place;
   const data = locations[place];
 
   document.getElementById("location").textContent = place;
@@ -28,15 +35,15 @@ function setLocation(place) {
   savePudData();
 }
 
-function changeMetric(metric, amount) {
+export function changeMetric(metric, amount) {
   if (metric === "bugs") {
-    bugs += amount;
-    if (bugs < 0) bugs = 0;
+    state.bugs += amount;
+    if (state.bugs < 0) state.bugs = 0;
   }
 
   if (metric === "meetings") {
-    meetings += amount;
-    if (meetings < 0) meetings = 0;
+    state.meetings += amount;
+    if (state.meetings < 0) state.meetings = 0;
   }
 
   renderStats();
@@ -45,8 +52,8 @@ function changeMetric(metric, amount) {
   savePudData();
 }
 
-function updateCaffeine(value) {
-  caffeine = Number(value);
+export function updateCaffeine(value) {
+  state.caffeine = Number(value);
 
   renderStats();
   updateApproval();
@@ -54,45 +61,45 @@ function updateCaffeine(value) {
   savePudData();
 }
 
-function addMissionLog() {
+export function addMissionLog() {
   const input = document.getElementById("missionInput");
   const text = input.value.trim();
 
-  if (text === "") {
-    return;
-  }
+  if (text === "") return;
 
   const log = {
-    text: text,
+    text,
     date: new Date().toLocaleString()
   };
 
-  missionLogs.unshift(log);
+  state.missionLogs.unshift(log);
   input.value = "";
 
   renderMissionLog();
   savePudData();
 }
 
-function renderMissionLog() {
+export function renderMissionLog() {
   const list = document.getElementById("missionLog");
+
   if (!list) return;
+
   list.innerHTML = "";
 
-  missionLogs.forEach(function (log) {
+  state.missionLogs.forEach(function (log) {
     const item = document.createElement("li");
     item.textContent = `${log.date} — ${log.text}`;
     list.appendChild(item);
   });
 }
 
-function clearMissionLog() {
-  missionLogs = [];
+export function clearMissionLog() {
+  state.missionLogs = [];
   renderMissionLog();
   savePudData();
 }
 
-function resetPudData() {
+export function resetPudData() {
   localStorage.removeItem("pudData");
   location.reload();
 }
