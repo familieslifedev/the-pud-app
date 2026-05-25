@@ -1,43 +1,48 @@
-function getWeather() {
+import { state } from "./state.js";
+import { settings } from "./settings.js";
+import { updateApproval } from "./approval.js";
+import { savePudData, setText } from "./storage.js";
+
+export function getWeather() {
     if (!settings.weatherEnabled) {
-        document.getElementById("weatherStatus").textContent =
-            "Weather disabled in settings.";
+        setText("weatherStatus", "Weather disabled in settings.");
         return;
     }
 
     if (!navigator.geolocation) {
-        document.getElementById("weatherStatus").textContent =
-            "Geolocation not supported.";
+        setText("weatherStatus", "Geolocation not supported.");
         return;
     }
 
-    document.getElementById("weatherStatus").textContent =
-        "Requesting location...";
+    setText("weatherStatus", "Requesting location...");
 
     navigator.geolocation.getCurrentPosition(
         function (position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
             fetchWeather(
-                position.coords.latitude,
-                position.coords.longitude,
-                "Current Location"
+                lat,
+                lon,
+                `Current Location (${lat.toFixed(2)}, ${lon.toFixed(2)})`
             );
         },
         function () {
-            document.getElementById("weatherStatus").textContent =
-                "Location permission denied.";
+            setText("weatherStatus", "Location permission denied.");
         }
     );
 }
 
-async function fetchWeather(latitude, longitude, locationName = null) {
-    document.getElementById("weatherStatus").textContent =
-        "Fetching weather...";
+export async function fetchWeather(latitude, longitude, locationName = null) {
+    setText("weatherStatus", "Fetching weather...");
 
     if (locationName) {
-        document.getElementById("weatherLocation").textContent = locationName;
+        setText("weatherLocation", locationName);
     } else {
-        document.getElementById("weatherLocation").textContent =
-            `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+        setText(
+            "weatherLocation",
+            `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
+        );
     }
 
     const url =
@@ -56,74 +61,69 @@ async function fetchWeather(latitude, longitude, locationName = null) {
         const precipitation = current.precipitation;
         const weatherCode = current.weather_code;
 
-        document.getElementById("weatherTemp").textContent =
-            Math.round(temperature);
+        setText("weatherTemp", Math.round(temperature));
 
         applyWeatherBonus(weatherCode, precipitation, temperature);
 
         savePudData();
     } catch (error) {
         console.error("Weather fetch failed:", error);
-
-        document.getElementById("weatherStatus").textContent =
-            "Weather fetch failed.";
+        setText("weatherStatus", "Weather fetch failed.");
     }
 }
 
-function applyWeatherBonus(weatherCode, precipitation, temperature) {
+export function applyWeatherBonus(weatherCode, precipitation, temperature) {
     let status = "Unknown conditions";
-    weatherBonus = 0;
+    state.weatherBonus = 0;
 
     if (precipitation > 0) {
         status = "Rain detected. Pud is thriving.";
-        weatherBonus = 10;
+        state.weatherBonus = 10;
     } else if (weatherCode === 0) {
         status = "Clear skies. Acceptable amphibian visibility.";
-        weatherBonus = 2;
+        state.weatherBonus = 2;
     } else if (weatherCode >= 1 && weatherCode <= 3) {
         status = "Cloud coverage detected. Mild dampness vibes.";
-        weatherBonus = 4;
+        state.weatherBonus = 4;
     } else if (weatherCode >= 45 && weatherCode <= 48) {
         status = "Fog detected. Cryptid mode engaged.";
-        weatherBonus = 6;
+        state.weatherBonus = 6;
     }
 
     if (temperature >= 26) {
         status = "Heat detected. Pud stability reduced.";
-        weatherBonus -= 6;
+        state.weatherBonus -= 6;
     }
 
-    if (temperature <= 3) {
+    if (temperature <= 6) {
         status = "Cold detected. Pud requests blanket support.";
-        weatherBonus -= 3;
+        state.weatherBonus -= 3;
     }
 
-    document.getElementById("weatherStatus").textContent = status;
-    document.getElementById("weatherBonus").textContent = weatherBonus;
+    setText("weatherStatus", status);
+    setText("weatherBonus", state.weatherBonus);
 
     updateApproval();
 }
 
-async function searchWeatherLocation() {
+export async function searchWeatherLocation() {
     if (!settings.weatherEnabled) {
-        document.getElementById("weatherStatus").textContent =
-            "Weather disabled in settings.";
+        setText("weatherStatus", "Weather disabled in settings.");
         return;
     }
 
-    const query = document.getElementById("weatherSearchInput").value.trim();
+    const input = document.getElementById("weatherSearchInput");
+    const query = input ? input.value.trim() : "";
 
     if (query === "") {
-        document.getElementById("weatherStatus").textContent =
-            "Enter a location first.";
+        setText("weatherStatus", "Enter a location first.");
         return;
     }
 
     settings.preferredLocation = query;
     savePudData();
 
-    document.getElementById("weatherStatus").textContent =
-        "Searching location...";
+    setText("weatherStatus", "Searching location...");
 
     const url =
         `https://geocoding-api.open-meteo.com/v1/search` +
@@ -137,8 +137,7 @@ async function searchWeatherLocation() {
         const data = await response.json();
 
         if (!data.results || data.results.length === 0) {
-            document.getElementById("weatherStatus").textContent =
-                "No location found.";
+            setText("weatherStatus", "No location found.");
             return;
         }
 
@@ -148,8 +147,6 @@ async function searchWeatherLocation() {
         fetchWeather(place.latitude, place.longitude, locationName);
     } catch (error) {
         console.error("Location search failed:", error);
-
-        document.getElementById("weatherStatus").textContent =
-            "Location search failed.";
+        setText("weatherStatus", "Location search failed.");
     }
 }

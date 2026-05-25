@@ -1,4 +1,4 @@
-const quotes = [
+export const quotes = [
   "user morale appears stabilised.",
   "snack acquisition recommended.",
   "amphibious operations ongoing.",
@@ -11,17 +11,17 @@ const quotes = [
   "mud-based productivity forecast: strong."
 ];
 
-const certifications = [
+export const certifications = [
   "Certified Puddle Handler",
   "Snack Logistics Intern",
-  "Meeting Survivalist",
+  "Amphibian Meeting Survivalist",
   "MudOps Trainee",
   "Emotional Support Analyst",
   "Chief Wooper Officer"
 ];
 
-const locations = {
-  "Home": {
+export const locations = {
+  Home: {
     descriptor: "cosy",
     protocol: "domestic puddle stabilisation active",
     morale: 88,
@@ -30,7 +30,8 @@ const locations = {
     sleepiness: 42,
     adventure: 39
   },
-  "Office": {
+
+  Office: {
     descriptor: "professional goblin",
     protocol: "enterprise support operations active",
     morale: 74,
@@ -39,6 +40,7 @@ const locations = {
     sleepiness: 66,
     adventure: 21
   },
+
   "Gym Support": {
     descriptor: "sweaty but brave",
     protocol: "motivational amphibian protocols engaged",
@@ -48,7 +50,8 @@ const locations = {
     sleepiness: 58,
     adventure: 76
   },
-  "Airport": {
+
+  Airport: {
     descriptor: "suspicious of luggage",
     protocol: "travel anxiety mitigation squad deployed",
     morale: 68,
@@ -57,6 +60,7 @@ const locations = {
     sleepiness: 73,
     adventure: 88
   },
+
   "Spain Deployment": {
     descriptor: "sun-dried legend",
     protocol: "Mediterranean leisure protocols engaged :)",
