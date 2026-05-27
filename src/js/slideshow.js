@@ -9,6 +9,7 @@ export const pudImages = [
   "../assets/images/pud/pud-in-bag.jpg",
   "../assets/images/pud/pud-in-hotel.jpg",
   "../assets/images/pud/pud-office.jpg",
+  "../assets/images/pud/pud-office-2.jpg",
   "../assets/images/pud/pud-on-bed-1.jpg",
   "../assets/images/pud/pud-on-bed-2.jpg",
   "../assets/images/pud/pud-window.jpg"
