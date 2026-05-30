@@ -93,6 +93,10 @@ function applyAudioSettings() {
 
         message.classList.remove("hidden");
 
+        if (customAudioSection) {
+            customAudioSection.classList.add("hidden");
+        }
+
         if (stopAudioButton) {
             stopAudioButton.disabled = true;
         }
@@ -103,14 +107,16 @@ function applyAudioSettings() {
     audioCard.classList.remove("disabled-section");
 
     selector.disabled = false;
-
-    selector.innerHTML =
-        getSoundEnvironmentOptions();
+    selector.innerHTML = getSoundEnvironmentOptions();
 
     selector.value =
         settings.preferredEnvironment ?? "";
 
     message.classList.add("hidden");
+
+    if (customAudioSection) {
+        customAudioSection.classList.remove("hidden");
+    }
 
     if (stopAudioButton) {
         stopAudioButton.disabled = false;
@@ -193,4 +199,11 @@ function getSoundEnvironmentOptions() {
     <option value="noise">Noise 🎵</option>
     <option value="binaural">Binaural 🎧</option>
   `;
+}
+
+const customInput =
+    document.getElementById("customSoundInput");
+
+if (customInput) {
+    customInput.value = "";
 }

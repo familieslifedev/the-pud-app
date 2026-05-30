@@ -25,6 +25,8 @@ import {
     loadSoundEnvironment,
     toggleCustomSound,
     loadCustomSound,
+    setCustomSoundVolume,
+    removeCustomSound,
     stopAllSounds
 } from "./sounds.js";
 
@@ -58,6 +60,8 @@ window.resetPomodoro = resetPomodoro;
 window.loadSoundEnvironment = loadSoundEnvironment;
 window.toggleCustomSound = toggleCustomSound;
 window.loadCustomSound = loadCustomSound;
+window.setCustomSoundVolume = setCustomSoundVolume;
+window.removeCustomSound = removeCustomSound;
 window.stopAllSounds = stopAllSounds;
 
 window.nextPudImage = nextPudImage;
