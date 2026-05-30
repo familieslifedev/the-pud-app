@@ -168,6 +168,13 @@ export function stopAllSounds() {
     state.customSound.volume = 0.5;
   }
 
+  const customSlider =
+    document.getElementById("customSoundVolume");
+
+  if (customSlider) {
+    customSlider.value = 50;
+  }
+
   document
     .querySelectorAll(
       ".sound-row input[type='range']"
@@ -203,5 +210,28 @@ export function toggleCustomSound() {
     state.customSound.play();
   } else {
     state.customSound.pause();
+  }
+}
+
+export function setCustomSoundVolume(value) {
+  if (!state.customSound) return;
+
+  state.customSound.volume = Number(value) / 100;
+}
+
+export function removeCustomSound() {
+  if (!state.customSound) return;
+
+  state.customSound.pause();
+
+  URL.revokeObjectURL(state.customSound.src);
+
+  state.customSound = null;
+
+  const input =
+    document.getElementById("customSoundInput");
+
+  if (input) {
+    input.value = "";
   }
 }
