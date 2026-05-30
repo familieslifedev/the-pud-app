@@ -1,28 +1,28 @@
 export const state = {
-    currentLocation: "Home",
+  currentLocation: "Home",
 
-    bugs: 0,
-    meetings: 0,
-    caffeine: 0,
+  bugs: 0,
+  meetings: 0,
+  caffeine: 0,
 
-    weatherBonus: 0,
-    approval: 0,
+  weatherBonus: 0,
+  approval: 0,
 
-    missionLogs: [],
+  missionLogs: [],
 
-    uptimeSeconds: 0,
-    uptimeInterval: null,
+  uptimeSeconds: 0,
+  uptimeInterval: null,
 
-    pomodoroSeconds: 25 * 60,
-    pomodoroInterval: null,
+  pomodoroSeconds: 25 * 60,
+  pomodoroInterval: null,
 
-    unlockedAchievements: [],
+  unlockedAchievements: [],
 
-    currentSoundEnvironment: "",
+  currentSoundEnvironment: "",
 
-    currentPudImageIndex: 0,
-    slideshowInterval: null,
+  currentPudImageIndex: 0,
+  slideshowInterval: null,
 
-    activeSounds: {},
-    customSound: null
+  activeSounds: {},
+  customSound: null,
 };

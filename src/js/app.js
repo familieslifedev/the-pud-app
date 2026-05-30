@@ -3,43 +3,46 @@ import { applySettings, updateSetting } from "./settings.js";
 import { finishLoading } from "./loading.js";
 
 import {
-    generateQuote,
-    setLocation,
-    changeMetric,
-    updateCaffeine,
-    addMissionLog,
-    clearMissionLog,
-    resetPudData
+  generateQuote,
+  setLocation,
+  changeMetric,
+  updateCaffeine,
+  addMissionLog,
+  clearMissionLog,
+  resetPudData,
 } from "./actions.js";
 
 import {
-    startUptime,
-    pauseUptime,
-    resetUptime,
-    startPomodoro,
-    pausePomodoro,
-    resetPomodoro
+  startUptime,
+  pauseUptime,
+  resetUptime,
+  startPomodoro,
+  pausePomodoro,
+  resetPomodoro,
 } from "./timer.js";
 
 import {
-    loadSoundEnvironment,
-    toggleCustomSound,
-    loadCustomSound,
-    setCustomSoundVolume,
-    removeCustomSound,
-    stopAllSounds
+  loadSoundEnvironment,
+  toggleCustomSound,
+  loadCustomSound,
+  setCustomSoundVolume,
+  removeCustomSound,
+  stopAllSounds,
 } from "./sounds.js";
 
 import {
-    nextPudImage,
-    previousPudImage,
-    togglePudSlideshow,
-    stopPudSlideshow
+  nextPudImage,
+  previousPudImage,
+  togglePudSlideshow,
+  stopPudSlideshow,
 } from "./slideshow.js";
 
 import {
-    getWeather,
-    searchWeatherLocation
+  getWeather,
+  searchWeatherLocation,
+  loadPreferredWeather,
+  clearWeatherDisplay,
+  syncWeatherInputs,
 } from "./weather.js";
 
 window.generateQuote = generateQuote;
@@ -71,9 +74,13 @@ window.stopPudSlideshow = stopPudSlideshow;
 
 window.getWeather = getWeather;
 window.searchWeatherLocation = searchWeatherLocation;
+window.loadPreferredWeather = loadPreferredWeather;
+window.clearWeatherDisplay = clearWeatherDisplay;
+window.syncWeatherInputs = syncWeatherInputs;
 
 window.updateSetting = updateSetting;
 
 loadPudData();
 applySettings();
+loadPreferredWeather();
 finishLoading();

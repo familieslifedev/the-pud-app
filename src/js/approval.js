@@ -8,8 +8,8 @@ export function updateApproval() {
 
   score += locationData.morale * 0.22;
   score += locationData.snacks * 0.16;
-  score += locationData.support * 0.20;
-  score += locationData.adventure * 0.10;
+  score += locationData.support * 0.2;
+  score += locationData.adventure * 0.1;
 
   score += Math.min(state.bugs, 25) * 0.9;
   score += Math.min(state.meetings, 15) * 0.7;
