@@ -39,6 +39,22 @@
 
         <div id="soundControls"></div>
 
+        <div class="custom-audio" id="customAudioSection">
+          <h3>🎵 Custom Audio</h3>
+
+          <input type="file" id="customSoundInput" accept="audio/*" onchange="loadCustomSound(this)" />
+
+          <button onclick="toggleCustomSound()">
+            Play / Pause Custom
+          </button>
+          <input type="range" min="0" max="100" value="50" id="customSoundVolume"
+            oninput="setCustomSoundVolume(this.value)" />
+
+          <button onclick="removeCustomSound()">
+            🗑️ Remove
+          </button>
+        </div>
+
         <button class="danger-button" id="stopAudioButton" onclick="stopAllSounds()">Stop Audio 🔇</button>
       </section>
 
