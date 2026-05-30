@@ -13,8 +13,7 @@ export function updateIncidentId() {
     .toUpperCase()
     .replaceAll(" ", "-");
 
-  incident.textContent =
-    `PUD-${number}-${cleanLocation}`;
+  incident.textContent = `PUD-${number}-${cleanLocation}`;
 }
 
 export function renderStats() {
@@ -22,8 +21,7 @@ export function renderStats() {
   setText("meetings", state.meetings);
   setText("caffeine", state.caffeine);
 
-  const caffeineSlider =
-    document.getElementById("caffeineSlider");
+  const caffeineSlider = document.getElementById("caffeineSlider");
 
   if (caffeineSlider) {
     caffeineSlider.value = state.caffeine;

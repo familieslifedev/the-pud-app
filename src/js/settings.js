@@ -1,189 +1,175 @@
 import { state } from "./state.js";
-import {
-    stopAllSounds,
-    loadSoundEnvironment
-} from "./sounds.js";
-
+import { stopAllSounds, loadSoundEnvironment } from "./sounds.js";
 import { stopPudSlideshow } from "./slideshow.js";
 import { savePudData } from "./storage.js";
+import { clearWeatherDisplay, syncWeatherInputs } from "./weather.js";
 
 export let settings = {
-    soundsEnabled: true,
-    slideshowEnabled: true,
-    weatherEnabled: true,
-    preferredEnvironment: "",
-    preferredLocation: ""
+  soundsEnabled: true,
+  slideshowEnabled: true,
+  weatherEnabled: true,
+  preferredEnvironment: "",
+  preferredLocation: "",
 };
 
 export function updateSetting(key, value) {
-    settings[key] = value;
+  settings[key] = value;
 
-    applySettings();
-    savePudData();
+  applySettings();
+  savePudData();
 }
 
 export function loadSettings(savedSettings = {}) {
-    settings = {
-        ...settings,
-        ...savedSettings
-    };
+  settings = {
+    ...settings,
+    ...savedSettings,
+  };
 
-    document.getElementById("soundsEnabled").checked =
-        settings.soundsEnabled;
+  document.getElementById("soundsEnabled").checked = settings.soundsEnabled;
 
-    document.getElementById("slideshowEnabled").checked =
-        settings.slideshowEnabled;
+  document.getElementById("slideshowEnabled").checked =
+    settings.slideshowEnabled;
 
-    document.getElementById("weatherEnabled").checked =
-        settings.weatherEnabled;
+  document.getElementById("weatherEnabled").checked = settings.weatherEnabled;
 
-    document.getElementById("preferredEnvironment").value =
-        settings.preferredEnvironment;
+  document.getElementById("preferredEnvironment").value =
+    settings.preferredEnvironment;
 
-    document.getElementById("preferredLocation").value =
-        settings.preferredLocation;
+  document.getElementById("preferredLocation").value =
+    settings.preferredLocation;
 
-    applySettings();
+  applySettings();
 }
 
 export function applySettings() {
-    applyAudioSettings();
-    applySlideshowSettings();
-    applyWeatherSettings();
+  applyAudioSettings();
+  applySlideshowSettings();
+  applyWeatherSettings();
 }
 
 function applyAudioSettings() {
-    const audioCard =
-        document.getElementById("audioCard");
+  const audioCard = document.getElementById("audioCard");
 
-    const selector =
-        document.getElementById("soundEnvironment");
+  const selector = document.getElementById("soundEnvironment");
 
-    const soundControls =
-        document.getElementById("soundControls");
+  const soundControls = document.getElementById("soundControls");
 
-    const stopAudioButton =
-        document.getElementById("stopAudioButton");
+  const stopAudioButton = document.getElementById("stopAudioButton");
 
-    const message =
-        document.getElementById("audioDisabledMessage");
+  const message = document.getElementById("audioDisabledMessage");
 
-    if (
-        !audioCard ||
-        !selector ||
-        !soundControls ||
-        !message
-    ) {
-        return;
-    }
+  if (!audioCard || !selector || !soundControls || !message) {
+    return;
+  }
 
-    if (!settings.soundsEnabled) {
-        stopAllSounds();
+  if (!settings.soundsEnabled) {
+    stopAllSounds();
 
-        audioCard.classList.add("disabled-section");
+    audioCard.classList.add("disabled-section");
 
-        selector.innerHTML = `
+    selector.innerHTML = `
       <option value="">Audio is disabled in settings</option>
     `;
 
-        selector.value = "";
-        selector.disabled = true;
+    selector.value = "";
+    selector.disabled = true;
 
-        soundControls.innerHTML = "";
+    soundControls.innerHTML = "";
 
-        message.classList.remove("hidden");
-
-        if (customAudioSection) {
-            customAudioSection.classList.add("hidden");
-        }
-
-        if (stopAudioButton) {
-            stopAudioButton.disabled = true;
-        }
-
-        return;
-    }
-
-    audioCard.classList.remove("disabled-section");
-
-    selector.disabled = false;
-    selector.innerHTML = getSoundEnvironmentOptions();
-
-    selector.value =
-        settings.preferredEnvironment ?? "";
-
-    message.classList.add("hidden");
+    message.classList.remove("hidden");
 
     if (customAudioSection) {
-        customAudioSection.classList.remove("hidden");
+      customAudioSection.classList.add("hidden");
     }
 
     if (stopAudioButton) {
-        stopAudioButton.disabled = false;
+      stopAudioButton.disabled = true;
     }
 
-    if (
-        settings.preferredEnvironment &&
-        state.currentSoundEnvironment !==
-        settings.preferredEnvironment
-    ) {
-        loadSoundEnvironment(
-            settings.preferredEnvironment
-        );
-    }
+    return;
+  }
+
+  audioCard.classList.remove("disabled-section");
+
+  selector.disabled = false;
+  selector.innerHTML = getSoundEnvironmentOptions();
+
+  selector.value = settings.preferredEnvironment ?? "";
+
+  message.classList.add("hidden");
+
+  if (customAudioSection) {
+    customAudioSection.classList.remove("hidden");
+  }
+
+  if (stopAudioButton) {
+    stopAudioButton.disabled = false;
+  }
+
+  if (
+    settings.preferredEnvironment &&
+    state.currentSoundEnvironment !== settings.preferredEnvironment
+  ) {
+    loadSoundEnvironment(settings.preferredEnvironment);
+  }
 }
 
 function applySlideshowSettings() {
-    const slideshowCard =
-        document.getElementById("slideshowCard");
+  const slideshowCard = document.getElementById("slideshowCard");
 
-    const slideshowContent =
-        document.getElementById("slideshowContent");
+  const slideshowContent = document.getElementById("slideshowContent");
 
-    const message =
-        document.getElementById("slideshowDisabledMessage");
+  const message = document.getElementById("slideshowDisabledMessage");
 
-    if (
-        !slideshowCard ||
-        !slideshowContent ||
-        !message
-    ) {
-        return;
-    }
+  if (!slideshowCard || !slideshowContent || !message) {
+    return;
+  }
 
-    if (!settings.slideshowEnabled) {
-        stopPudSlideshow();
+  if (!settings.slideshowEnabled) {
+    stopPudSlideshow();
 
-        slideshowCard.classList.add("disabled-section");
+    slideshowCard.classList.add("disabled-section");
 
-        slideshowContent.classList.add("hidden");
+    slideshowContent.classList.add("hidden");
 
-        message.classList.remove("hidden");
+    message.classList.remove("hidden");
 
-        return;
-    }
+    return;
+  }
 
-    slideshowCard.classList.remove("disabled-section");
+  slideshowCard.classList.remove("disabled-section");
 
-    slideshowContent.classList.remove("hidden");
+  slideshowContent.classList.remove("hidden");
 
-    message.classList.add("hidden");
+  message.classList.add("hidden");
 }
 
 function applyWeatherSettings() {
-    const weatherCard =
-        document.getElementById("weatherCard");
+  const weatherCard = document.getElementById("weatherCard");
+  const weatherContent = document.getElementById("weatherContent");
+  const message = document.getElementById("weatherDisabledMessage");
 
-    if (!weatherCard) return;
+  if (!weatherCard || !weatherContent || !message) return;
 
-    weatherCard.classList.toggle(
-        "disabled-section",
-        !settings.weatherEnabled
-    );
+  if (!settings.weatherEnabled) {
+    weatherCard.classList.add("disabled-section");
+    weatherContent.classList.add("hidden");
+    message.classList.remove("hidden");
+
+    clearWeatherDisplay("Weather disabled in settings.");
+
+    return;
+  }
+
+  weatherCard.classList.remove("disabled-section");
+  weatherContent.classList.remove("hidden");
+  message.classList.add("hidden");
+
+  syncWeatherInputs();
 }
 
 function getSoundEnvironmentOptions() {
-    return `
+  return `
     <option value="">Select ambience...</option>
     <option value="rainfall">Rainfall ☔️</option>
     <option value="thunderstorm">Thunderstorm ⛈️</option>
@@ -201,9 +187,8 @@ function getSoundEnvironmentOptions() {
   `;
 }
 
-const customInput =
-    document.getElementById("customSoundInput");
+const customInput = document.getElementById("customSoundInput");
 
 if (customInput) {
-    customInput.value = "";
+  customInput.value = "";
 }

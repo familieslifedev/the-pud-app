@@ -16,13 +16,11 @@ export function finishLoading() {
     loadingProgress.style.width = `${progress}%`;
 
     if (progress === 50) {
-      loadingText.textContent =
-        "loading moisture framework...";
+      loadingText.textContent = "loading moisture framework...";
     }
 
     if (progress === 100) {
-      loadingText.textContent =
-        "enterprise amphibian systems online.";
+      loadingText.textContent = "enterprise amphibian systems online.";
 
       clearInterval(interval);
 

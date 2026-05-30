@@ -1,268 +1,409 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Pud App</title>
+    <link rel="stylesheet" href="style/main.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>The Pud App</title>
-  <link rel="stylesheet" href="style/main.css" />
-</head>
+  <body>
+    <div id="loadingScreen">
+      <div class="loading-content">
+        <h1>👁️‿👁️</h1>
 
-<body>
-  <div id="loadingScreen">
-    <div class="loading-content">
-      <h1>👁️‿👁️</h1>
+        <p id="loadingText">initialising puddle infrastructure...</p>
 
-      <p id="loadingText">
-        initialising puddle infrastructure...
-      </p>
-
-      <div class="loading-bar">
-        <div id="loadingProgress"></div>
+        <div class="loading-bar">
+          <div id="loadingProgress"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <main class="app hidden" id="app">
-    <h1>👁️‿👁️ The Pud App</h1>
-    <h2>moist amphibian enterprise software</h2>
+    <main class="app hidden" id="app">
+      <h1>👁️‿👁️ The Pud App</h1>
+      <h2>moist amphibian enterprise software</h2>
 
-    <div class="top-dashboard">
-      <section class="card disabled-section" id="audioCard">
-        <h2>Ambient Mixer 🎧</h2>
+      <div class="top-dashboard">
+        <section class="card disabled-section" id="audioCard">
+          <h2>Ambient Mixer 🎧</h2>
 
-        <select id="soundEnvironment" onchange="loadSoundEnvironment(this.value)">
-        </select>
+          <select
+            id="soundEnvironment"
+            onchange="loadSoundEnvironment(this.value)"
+          ></select>
 
-        <p id="audioDisabledMessage" class="disabled-message hidden">
-          ---
+          <p id="audioDisabledMessage" class="disabled-message hidden">---</p>
+
+          <div id="soundControls"></div>
+
+          <div class="custom-audio" id="customAudioSection">
+            <h3>🎵 Custom Audio</h3>
+
+            <input
+              type="file"
+              id="customSoundInput"
+              accept="audio/*"
+              onchange="loadCustomSound(this)"
+            />
+
+            <button onclick="toggleCustomSound()">Play / Pause Custom</button>
+
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              id="customSoundVolume"
+              oninput="setCustomSoundVolume(this.value)"
+            />
+
+            <button onclick="removeCustomSound()">🗑️ Remove</button>
+          </div>
+
+          <button
+            class="danger-button"
+            id="stopAudioButton"
+            onclick="stopAllSounds()"
+          >
+            Stop Audio 🔇
+          </button>
+        </section>
+
+        <section class="card" id="slideshowCard">
+          <h2>Pud Field Documentation 📷</h2>
+
+          <p id="slideshowDisabledMessage" class="disabled-message hidden">
+            Pictures are disabled in settings.
+          </p>
+
+          <div id="slideshowContent">
+            <img
+              id="pudSlideshow"
+              class="pud-slideshow"
+              src="../assets/images/pud/pud-close.jpg"
+              alt="Pud slideshow"
+            />
+
+            <div class="slideshow-buttons">
+              <button onclick="previousPudImage()">Previous ⏪</button>
+
+              <button onclick="nextPudImage()">Next ⏩</button>
+
+              <button onclick="togglePudSlideshow()">Start / Stop ⏯️</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card" id="weatherCard">
+        <h2>Weather 🌦️</h2>
+
+        <p id="weatherDisabledMessage" class="disabled-message hidden">
+          Weather is disabled in settings.
         </p>
 
-        <div id="soundControls"></div>
+        <div id="weatherContent" class="hidden">
+          <input
+            id="weatherSearchInput"
+            type="text"
+            placeholder="Enter city or postcode"
+          />
 
-        <div class="custom-audio" id="customAudioSection">
-          <h3>🎵 Custom Audio</h3>
+          <button onclick="searchWeatherLocation()">Search Weather 🔎</button>
 
-          <input type="file" id="customSoundInput" accept="audio/*" onchange="loadCustomSound(this)" />
+          <p>
+            <strong>Status:</strong>
+            <span id="weatherStatus">Not loaded</span>
+          </p>
 
-          <button onclick="toggleCustomSound()">
-            Play / Pause Custom
-          </button>
-          <input type="range" min="0" max="100" value="50" id="customSoundVolume"
-            oninput="setCustomSoundVolume(this.value)" />
+          <p>
+            <strong>Location:</strong>
+            <span id="weatherLocation">Unknown</span>
+          </p>
 
-          <button onclick="removeCustomSound()">
-            🗑️ Remove
-          </button>
+          <p>
+            <strong>Temperature:</strong>
+            <span id="weatherTemp">--</span>°C
+          </p>
+
+          <p>
+            <strong>Pud Weather Bonus:</strong>
+            <span id="weatherBonus">0</span>
+          </p>
+
+          <button onclick="getWeather()">Use My Location 📍</button>
         </div>
-
-        <button class="danger-button" id="stopAudioButton" onclick="stopAllSounds()">Stop Audio 🔇</button>
       </section>
 
-      <section class="card" id="slideshowCard">
-        <h2>Pud Field Documentation 📷</h2>
+      <section class="card">
+        <h2>Pud Status 📊</h2>
 
-        <p id="slideshowDisabledMessage" class="disabled-message hidden">
-          Pictures are disabled in settings.
+        <p>
+          <strong>Mood:</strong>
+          <span id="mood"></span>
         </p>
 
-        <div id="slideshowContent">
-          <img id="pudSlideshow" class="pud-slideshow" src="../assets/images/pud/pud-close.jpg" alt="Pud slideshow" />
+        <p>
+          <strong>Status:</strong>
+          <span id="descriptor"></span>
+        </p>
 
-          <div class="slideshow-buttons">
-            <button onclick="previousPudImage()">Previous ⏪</button>
-            <button onclick="nextPudImage()">Next ⏩</button>
-            <button onclick="togglePudSlideshow()">Start / Stop ⏯️</button>
+        <p>
+          <strong>Location:</strong>
+          <span id="location"></span>
+        </p>
+
+        <p>
+          <strong>Protocol:</strong>
+          <span id="protocol"></span>
+        </p>
+
+        <div class="stat">
+          <span>Morale 😊</span>
+          <progress id="morale" value="88" max="100"></progress>
+        </div>
+
+        <div class="stat">
+          <span>Snacks 🍪</span>
+          <progress id="snacks" value="71" max="100"></progress>
+        </div>
+
+        <div class="stat">
+          <span>Support 🤝</span>
+          <progress id="support" value="94" max="100"></progress>
+        </div>
+
+        <div class="stat">
+          <span>Sleepiness 😴</span>
+          <progress id="sleepiness" value="42" max="100"></progress>
+        </div>
+
+        <div class="stat">
+          <span>Adventure 🗺️</span>
+          <progress id="adventure" value="39" max="100"></progress>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Deploy Pud 🌍</h2>
+
+        <button onclick="setLocation('Home')">Home 🏠</button>
+
+        <button onclick="setLocation('Office')">Office 🏢</button>
+
+        <button onclick="setLocation('Gym Support')">Gym Support 🏋️</button>
+
+        <button onclick="setLocation('Airport')">Airport ✈️</button>
+
+        <button onclick="setLocation('Spain Deployment')">
+          Spain Deployment 🇪🇸
+        </button>
+      </section>
+
+      <section class="card">
+        <h2>Pud Quote 💬</h2>
+
+        <p id="quote">awaiting amphibian insight...</p>
+
+        <button onclick="generateQuote()">Request Amphibian Insight 💡</button>
+      </section>
+
+      <section class="card">
+        <h2>Operational Metrics 📈</h2>
+
+        <div class="metric-row">
+          <span>Bugs Prevented 🐞</span>
+
+          <div>
+            <button onclick="changeMetric('bugs', -1)">-</button>
+
+            <strong id="bugs">0</strong>
+
+            <button onclick="changeMetric('bugs', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <span>Meetings Survived 🗓️</span>
+
+          <div>
+            <button onclick="changeMetric('meetings', -1)">-</button>
+
+            <strong id="meetings">0</strong>
+
+            <button onclick="changeMetric('meetings', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <span>Caffeine Exposure ☕️</span>
+
+          <div class="slider-wrap">
+            <input
+              type="range"
+              id="caffeineSlider"
+              min="0"
+              max="100"
+              value="0"
+              oninput="updateCaffeine(this.value)"
+            />
+
+            <strong> <span id="caffeine">0</span>% </strong>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <span>Pud Approval ✔️</span>
+
+          <strong> <span id="approval">0</span>% </strong>
+        </div>
+
+        <div class="metric-row">
+          <button onclick="resetPudData()">Reset Pud Data</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Mission Log 📝</h2>
+
+        <textarea
+          id="missionInput"
+          placeholder="Log today's operations..."
+        ></textarea>
+
+        <button onclick="addMissionLog()">Add Log</button>
+
+        <button onclick="clearMissionLog()">Clear Logs</button>
+
+        <ul id="missionLog"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Pud Timer ⏱️</h2>
+
+        <div class="timer-box">
+          <h3>Monitoring Time</h3>
+
+          <p class="timer-display" id="uptimeDisplay">00:00:00</p>
+
+          <button onclick="startUptime()">Start</button>
+
+          <button onclick="pauseUptime()">Pause</button>
+
+          <button onclick="resetUptime()">Reset</button>
+        </div>
+
+        <div class="timer-box">
+          <h3>Pomodoro 🍅</h3>
+
+          <p class="timer-display" id="pomodoroDisplay">25:00</p>
+
+          <button onclick="startPomodoro()">Start</button>
+
+          <button onclick="pausePomodoro()">Pause</button>
+
+          <button onclick="resetPomodoro()">Reset</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Achievements 🏆</h2>
+        <ul id="achievementList"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Certification 🏷️</h2>
+        <p id="achievement">Chief Wooper Officer</p>
+        <p>
+          <strong>Incident ID:</strong> <span id="incident">PUD-0001-HOME</span>
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Settings ⚙️</h2>
+
+        <div class="settings-grid">
+          <div class="setting-row">
+            <div>
+              <label for="soundsEnabled">Sounds enabled</label>
+              <small>Allows ambience and custom audio playback.</small>
+            </div>
+            <input
+              id="soundsEnabled"
+              type="checkbox"
+              checked
+              onchange="updateSetting('soundsEnabled', this.checked)"
+            />
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <label for="slideshowEnabled">Slideshow enabled</label>
+              <small>Allows Pud field documentation to auto-rotate.</small>
+            </div>
+            <input
+              id="slideshowEnabled"
+              type="checkbox"
+              checked
+              onchange="updateSetting('slideshowEnabled', this.checked)"
+            />
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <label for="weatherEnabled">Weather enabled</label>
+              <small>Allows real weather to affect Pud Approval.</small>
+            </div>
+            <input
+              id="weatherEnabled"
+              type="checkbox"
+              checked
+              onchange="updateSetting('weatherEnabled', this.checked)"
+            />
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <label for="preferredEnvironment">Preferred ambience</label>
+              <small>Default sound environment for Pud operations.</small>
+            </div>
+            <select
+              id="preferredEnvironment"
+              onchange="updateSetting('preferredEnvironment', this.value)"
+            >
+              <option value="">None</option>
+              <option value="rainfall">Rainfall ☔️</option>
+              <option value="thunderstorm">Thunderstorm ⛈️</option>
+              <option value="office">Office 🏢</option>
+              <option value="forest">Forest 🌳</option>
+              <option value="cafe">Cafe ☕️</option>
+              <option value="beach">Beach 🏖️</option>
+              <option value="ocean">Ocean 🌊</option>
+              <option value="campfire">Campfire 🔥</option>
+              <option value="creek">Creek 🏞️</option>
+              <option value="garden">Garden 🌱</option>
+              <option value="train">Train 🚆</option>
+              <option value="noise">Noise 🎵</option>
+              <option value="binaural">Binaural 🎧</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <label for="preferredLocation">Preferred weather location</label>
+              <small>Used when searching weather manually.</small>
+            </div>
+            <input
+              id="preferredLocation"
+              type="text"
+              placeholder="e.g. London"
+              onchange="updateSetting('preferredLocation', this.value)"
+            />
           </div>
         </div>
       </section>
-    </div>
+    </main>
 
-    <section class="card" id="weatherCard">
-      <h2>Weather 🌦️</h2>
-
-      <input id="weatherSearchInput" type="text" placeholder="Enter city or postcode" />
-      <button onclick="searchWeatherLocation()">Search Weather 🔎</button>
-      <p><strong>Status:</strong> <span id="weatherStatus">Not loaded</span></p>
-      <p><strong>Location:</strong> <span id="weatherLocation">Unknown</span></p>
-      <p><strong>Temperature:</strong> <span id="weatherTemp">--</span>°C</p>
-      <p><strong>Pud Weather Bonus:</strong> <span id="weatherBonus">0</span></p>
-
-      <button onclick="getWeather()">Use My Location 📍</button>
-    </section>
-
-    <section class="card">
-      <h2>Pud Status 📊</h2>
-      <p><strong>Mood:</strong> <span id="mood"></span></p>
-      <p><strong>Status:</strong> <span id="descriptor"></span></p>
-      <p><strong>Location:</strong> <span id="location"></span></p>
-      <p><strong>Protocol:</strong> <span id="protocol"></span></p>
-      <div class="stat"><span>Morale 😊</span><progress id="morale" value="88" max="100"></progress></div>
-      <div class="stat"><span>Snacks 🍪</span><progress id="snacks" value="71" max="100"></progress></div>
-      <div class="stat"><span>Support 🤝</span><progress id="support" value="94" max="100"></progress></div>
-      <div class="stat"><span>Sleepiness 😴</span><progress id="sleepiness" value="42" max="100"></progress></div>
-      <div class="stat"><span>Adventure 🗺️</span><progress id="adventure" value="39" max="100"></progress></div>
-    </section>
-
-    <section class="card">
-      <h2>Deploy Pud 🌍</h2>
-      <button onclick="setLocation('Home')">Home 🏠</button>
-      <button onclick="setLocation('Office')">Office 🏢</button>
-      <button onclick="setLocation('Gym Support')">Gym Support 🏋️</button>
-      <button onclick="setLocation('Airport')">Airport ✈️</button>
-      <button onclick="setLocation('Spain Deployment')">Spain Deployment 🇪🇸</button>
-    </section>
-
-    <section class="card">
-      <h2>Pud Quote 💬</h2>
-      <p id="quote">awaiting amphibian insight...</p>
-      <button onclick="generateQuote()">Request Amphibian Insight 💡</button>
-    </section>
-
-    <section class="card">
-      <h2>Operational Metrics 📈</h2>
-
-      <div class="metric-row">
-        <span>Bugs Prevented 🐞</span>
-        <div>
-          <button onclick="changeMetric('bugs', -1)">-</button>
-          <strong id="bugs">0</strong>
-          <button onclick="changeMetric('bugs', 1)">+</button>
-        </div>
-      </div>
-
-      <div class="metric-row">
-        <span>Meetings Survived 🗓️</span>
-        <div>
-          <button onclick="changeMetric('meetings', -1)">-</button>
-          <strong id="meetings">0</strong>
-          <button onclick="changeMetric('meetings', 1)">+</button>
-        </div>
-      </div>
-
-      <div class="metric-row">
-        <span>Caffeine Exposure ☕️</span>
-        <div class="slider-wrap">
-          <input type="range" id="caffeineSlider" min="0" max="100" value="0" oninput="updateCaffeine(this.value)" />
-          <strong><span id="caffeine">0</span>%</strong>
-        </div>
-      </div>
-
-      <div class="metric-row">
-        <span>Pud Approval ✔️</span>
-        <strong><span id="approval">0</span>%</strong>
-      </div>
-
-      <div class="metric-row">
-        <button onclick="resetPudData()">Reset Pud Data</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Mission Log 📝</h2>
-      <textarea id="missionInput" placeholder="Log today's operations..."></textarea>
-      <button onclick="addMissionLog()">Add Log</button>
-      <button onclick="clearMissionLog()">Clear Logs</button>
-      <ul id="missionLog"></ul>
-    </section>
-
-    <section class="card">
-      <h2>Pud Timer ⏱️</h2>
-
-      <div class="timer-box">
-        <h3>Monitoring Time</h3>
-        <p class="timer-display" id="uptimeDisplay">00:00:00</p>
-
-        <button onclick="startUptime()">Start</button>
-        <button onclick="pauseUptime()">Pause</button>
-        <button onclick="resetUptime()">Reset</button>
-      </div>
-
-      <div class="timer-box">
-        <h3>Pomodoro 🍅</h3>
-        <p class="timer-display" id="pomodoroDisplay">25:00</p>
-
-        <button onclick="startPomodoro()">Start</button>
-        <button onclick="pausePomodoro()">Pause</button>
-        <button onclick="resetPomodoro()">Reset</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Achievements 🏆</h2>
-      <ul id="achievementList"></ul>
-    </section>
-
-    <section class="card">
-      <h2>Certification 🏷️</h2>
-      <p id="achievement">Chief Wooper Officer</p>
-      <p><strong>Incident ID:</strong> <span id="incident">PUD-0001-HOME</span></p>
-    </section>
-
-    <section class="card">
-      <h2>Settings ⚙️</h2>
-
-      <div class="settings-grid">
-        <div class="setting-row">
-          <div>
-            <label for="soundsEnabled">Sounds enabled</label>
-            <small>Allows ambience and custom audio playback.</small>
-          </div>
-          <input id="soundsEnabled" type="checkbox" checked onchange="updateSetting('soundsEnabled', this.checked)" />
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <label for="slideshowEnabled">Slideshow enabled</label>
-            <small>Allows Pud field documentation to auto-rotate.</small>
-          </div>
-          <input id="slideshowEnabled" type="checkbox" checked
-            onchange="updateSetting('slideshowEnabled', this.checked)" />
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <label for="weatherEnabled">Weather enabled</label>
-            <small>Allows real weather to affect Pud Approval.</small>
-          </div>
-          <input id="weatherEnabled" type="checkbox" checked onchange="updateSetting('weatherEnabled', this.checked)" />
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <label for="preferredEnvironment">Preferred ambience</label>
-            <small>Default sound environment for Pud operations.</small>
-          </div>
-          <select id="preferredEnvironment" onchange="updateSetting('preferredEnvironment', this.value)">
-            <option value="">None</option>
-            <option value="rainfall">Rainfall ☔️</option>
-            <option value="thunderstorm">Thunderstorm ⛈️</option>
-            <option value="office">Office 🏢</option>
-            <option value="forest">Forest 🌳</option>
-            <option value="cafe">Cafe ☕️</option>
-            <option value="beach">Beach 🏖️</option>
-            <option value="ocean">Ocean 🌊</option>
-            <option value="campfire">Campfire 🔥</option>
-            <option value="creek">Creek 🏞️</option>
-            <option value="garden">Garden 🌱</option>
-            <option value="train">Train 🚆</option>
-            <option value="noise">Noise 🎵</option>
-            <option value="binaural">Binaural 🎧</option>
-          </select>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <label for="preferredLocation">Preferred weather location</label>
-            <small>Used when searching weather manually.</small>
-          </div>
-          <input id="preferredLocation" type="text" placeholder="e.g. London"
-            onchange="updateSetting('preferredLocation', this.value)" />
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script type="module" src="./js/app.js"></script>
-</body>
-
+    <script type="module" src="./js/app.js"></script>
+  </body>
 </html>
