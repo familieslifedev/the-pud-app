@@ -69,7 +69,7 @@ export function addMissionLog() {
 
   const log = {
     text,
-    date: new Date().toLocaleString()
+    date: new Date().toLocaleString(),
   };
 
   state.missionLogs.unshift(log);

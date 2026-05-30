@@ -1,40 +1,20 @@
 import { state } from "./state.js";
 
-import {
-  renderStats
-} from "./ui.js";
+import { renderStats } from "./ui.js";
 
-import {
-  renderTimers
-} from "./timer.js";
+import { renderTimers } from "./timer.js";
 
-import {
-  renderAchievements
-} from "./achievements.js";
+import { renderAchievements } from "./achievements.js";
 
-import {
-  updateCertification
-} from "./certifications.js";
+import { updateCertification } from "./certifications.js";
 
-import {
-  renderMissionLog,
-  setLocation,
-  updateCaffeine
-} from "./actions.js";
+import { renderMissionLog, setLocation, updateCaffeine } from "./actions.js";
 
-import {
-  renderPudImage
-} from "./slideshow.js";
+import { renderPudImage } from "./slideshow.js";
 
-import {
-  updateApproval
-} from "./approval.js";
+import { updateApproval } from "./approval.js";
 
-import {
-  settings,
-  loadSettings,
-  applySettings
-} from "./settings.js";
+import { settings, loadSettings, applySettings } from "./settings.js";
 
 export function savePudData() {
   const pudData = {
@@ -55,29 +35,23 @@ export function savePudData() {
     quote: getText("quote"),
     achievement: getText("achievement"),
 
-    unlockedAchievements:
-      state.unlockedAchievements,
+    unlockedAchievements: state.unlockedAchievements,
 
     missionLogs: state.missionLogs,
 
     uptimeSeconds: state.uptimeSeconds,
     pomodoroSeconds: state.pomodoroSeconds,
 
-    currentPudImageIndex:
-      state.currentPudImageIndex,
+    currentPudImageIndex: state.currentPudImageIndex,
 
-    settings
+    settings,
   };
 
-  localStorage.setItem(
-    "pudData",
-    JSON.stringify(pudData)
-  );
+  localStorage.setItem("pudData", JSON.stringify(pudData));
 }
 
 export function loadPudData() {
-  const savedData =
-    localStorage.getItem("pudData");
+  const savedData = localStorage.getItem("pudData");
 
   if (savedData === null) {
     loadDefaultPudData();
@@ -90,37 +64,27 @@ export function loadPudData() {
 
   const pudData = JSON.parse(savedData);
 
-  state.currentLocation =
-    pudData.currentLocation ?? "Home";
+  state.currentLocation = pudData.currentLocation ?? "Home";
 
   state.bugs = pudData.bugs ?? 0;
   state.meetings = pudData.meetings ?? 0;
   state.caffeine = pudData.caffeine ?? 0;
 
-  state.approval =
-    pudData.approval ?? 0;
+  state.approval = pudData.approval ?? 0;
 
-  state.weatherBonus =
-    pudData.weatherBonus ?? 0;
+  state.weatherBonus = pudData.weatherBonus ?? 0;
 
-  state.unlockedAchievements =
-    pudData.unlockedAchievements ?? [];
+  state.unlockedAchievements = pudData.unlockedAchievements ?? [];
 
-  state.missionLogs =
-    pudData.missionLogs ?? [];
+  state.missionLogs = pudData.missionLogs ?? [];
 
-  state.uptimeSeconds =
-    pudData.uptimeSeconds ?? 0;
+  state.uptimeSeconds = pudData.uptimeSeconds ?? 0;
 
-  state.pomodoroSeconds =
-    pudData.pomodoroSeconds ?? 25 * 60;
+  state.pomodoroSeconds = pudData.pomodoroSeconds ?? 25 * 60;
 
-  state.currentPudImageIndex =
-    pudData.currentPudImageIndex ?? 0;
+  state.currentPudImageIndex = pudData.currentPudImageIndex ?? 0;
 
-  loadSettings(
-    pudData.settings ?? {}
-  );
+  loadSettings(pudData.settings ?? {});
 
   setLocation(state.currentLocation);
 
@@ -133,39 +97,17 @@ export function loadPudData() {
   renderMissionLog();
   renderPudImage();
 
-  setText(
-    "weatherBonus",
-    state.weatherBonus
-  );
+  setText("weatherBonus", state.weatherBonus);
 
-  setText(
-    "weatherStatus",
-    pudData.weatherStatus ??
-    "Not loaded"
-  );
+  setText("weatherStatus", pudData.weatherStatus ?? "Not loaded");
 
-  setText(
-    "weatherTemp",
-    pudData.weatherTemp ?? "--"
-  );
+  setText("weatherTemp", pudData.weatherTemp ?? "--");
 
-  setText(
-    "weatherLocation",
-    pudData.weatherLocation ??
-    "Unknown"
-  );
+  setText("weatherLocation", pudData.weatherLocation ?? "Unknown");
 
-  setText(
-    "quote",
-    pudData.quote ??
-    "awaiting amphibian insight..."
-  );
+  setText("quote", pudData.quote ?? "awaiting amphibian insight...");
 
-  setText(
-    "achievement",
-    pudData.achievement ??
-    "👁️ Chief Wooper Officer"
-  );
+  setText("achievement", pudData.achievement ?? "👁️ Chief Wooper Officer");
 
   updateCaffeine(state.caffeine);
 
@@ -190,17 +132,13 @@ export function loadDefaultPudData() {
 }
 
 export function getText(id) {
-  const element =
-    document.getElementById(id);
+  const element = document.getElementById(id);
 
-  return element
-    ? element.textContent
-    : "";
+  return element ? element.textContent : "";
 }
 
 export function setText(id, value) {
-  const element =
-    document.getElementById(id);
+  const element = document.getElementById(id);
 
   if (!element) {
     return;

@@ -8,7 +8,7 @@ export const quotes = [
   "meetings survived. emotional damage pending review.",
   "critical cuddle reserves remain operational.",
   "please submit all complaints directly into the pond.",
-  "mud-based productivity forecast: strong."
+  "mud-based productivity forecast: strong.",
 ];
 
 export const certifications = [
@@ -17,7 +17,7 @@ export const certifications = [
   "Amphibian Meeting Survivalist",
   "MudOps Trainee",
   "Emotional Support Analyst",
-  "Chief Wooper Officer"
+  "Chief Wooper Officer",
 ];
 
 export const locations = {
@@ -28,7 +28,7 @@ export const locations = {
     snacks: 71,
     support: 94,
     sleepiness: 42,
-    adventure: 39
+    adventure: 39,
   },
 
   Office: {
@@ -38,7 +38,7 @@ export const locations = {
     snacks: 43,
     support: 97,
     sleepiness: 66,
-    adventure: 21
+    adventure: 21,
   },
 
   "Gym Support": {
@@ -48,7 +48,7 @@ export const locations = {
     snacks: 35,
     support: 89,
     sleepiness: 58,
-    adventure: 76
+    adventure: 76,
   },
 
   Airport: {
@@ -58,7 +58,7 @@ export const locations = {
     snacks: 24,
     support: 92,
     sleepiness: 73,
-    adventure: 88
+    adventure: 88,
   },
 
   "Spain Deployment": {
@@ -68,6 +68,6 @@ export const locations = {
     snacks: 64,
     support: 99,
     sleepiness: 31,
-    adventure: 93
-  }
+    adventure: 93,
+  },
 };

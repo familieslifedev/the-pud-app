@@ -7,50 +7,50 @@ export const achievementRules = [
     name: "🐛 Bug Bonker",
     condition: function () {
       return state.bugs >= 1;
-    }
+    },
   },
   {
     id: "bug_intimidator",
     name: "🐛 Senior Bug Intimidator",
     condition: function () {
       return state.bugs >= 25;
-    }
+    },
   },
   {
     id: "meeting_survivor",
     name: "💼 Meeting Survivor",
     condition: function () {
       return state.meetings >= 1;
-    }
+    },
   },
   {
     id: "corporate_survivor",
     name: "💼 Corporate Amphibian",
     condition: function () {
       return state.meetings >= 10;
-    }
+    },
   },
   {
     id: "caffeine_hazard",
     name: "☕ Caffeine Hazard",
     condition: function () {
       return state.caffeine >= 90;
-    }
+    },
   },
   {
     id: "one_hour_operator",
     name: "⏱️ One Hour Operator",
     condition: function () {
       return state.uptimeSeconds >= 3600;
-    }
+    },
   },
   {
     id: "moisture_maxxer",
     name: "🏅 Moisture Maxxer",
     condition: function () {
       return state.approval === 100;
-    }
-  }
+    },
+  },
 ];
 
 export function checkAchievements() {
@@ -77,16 +77,11 @@ export function renderAchievements() {
   achievementRules.forEach(function (achievement) {
     const item = document.createElement("li");
 
-    const unlocked =
-      state.unlockedAchievements.includes(achievement.id);
+    const unlocked = state.unlockedAchievements.includes(achievement.id);
 
-    item.textContent = unlocked
-      ? achievement.name
-      : "🔒 Locked";
+    item.textContent = unlocked ? achievement.name : "🔒 Locked";
 
-    item.className = unlocked
-      ? "achievement unlocked"
-      : "achievement locked";
+    item.className = unlocked ? "achievement unlocked" : "achievement locked";
 
     list.appendChild(item);
   });

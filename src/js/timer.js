@@ -10,7 +10,7 @@ export function formatTime(seconds) {
   return [
     String(hrs).padStart(2, "0"),
     String(mins).padStart(2, "0"),
-    String(secs).padStart(2, "0")
+    String(secs).padStart(2, "0"),
   ].join(":");
 }
 

@@ -12,7 +12,7 @@ export const pudImages = [
   "../assets/images/pud/pud-office-2.jpg",
   "../assets/images/pud/pud-on-bed-1.jpg",
   "../assets/images/pud/pud-on-bed-2.jpg",
-  "../assets/images/pud/pud-window.jpg"
+  "../assets/images/pud/pud-window.jpg",
 ];
 
 export function renderPudImage() {
