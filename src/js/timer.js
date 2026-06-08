@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { checkAchievements } from "./achievements.js";
 import { savePudData } from "./storage.js";
+import { showToast } from "./toast.js";
 
 export function formatTime(seconds) {
   const hrs = Math.floor(seconds / 3600);
@@ -65,7 +66,10 @@ export function startPomodoro() {
       pausePomodoro();
       checkAchievements();
       savePudData();
-      alert("🍅 Pud Pomodoro complete. Snack acquisition recommended.");
+      showToast(
+        "🍅 Pud Pomodoro complete. Snack acquisition recommended.",
+        "pomodoro",
+      );
       return;
     }
 

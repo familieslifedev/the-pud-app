@@ -2,6 +2,7 @@ import { state } from "./state.js";
 import { settings } from "./settings.js";
 import { updateApproval } from "./approval.js";
 import { savePudData, setText } from "./storage.js";
+import { showToast } from "./toast.js";
 
 export function getWeather() {
   if (!settings.weatherEnabled) {
@@ -11,6 +12,7 @@ export function getWeather() {
 
   if (!navigator.geolocation) {
     clearWeatherDisplay("Geolocation not supported.");
+    showToast("🌦️ Weather error", "error");
     return;
   }
 
@@ -29,11 +31,17 @@ export function getWeather() {
     },
     function () {
       clearWeatherDisplay("Location permission denied.");
+      showToast("🌦️ Weather error", "error");
     },
   );
 }
 
-export async function fetchWeather(latitude, longitude, locationName = null) {
+export async function fetchWeather(
+  latitude,
+  longitude,
+  locationName = null,
+  showNotification = true,
+) {
   if (!settings.weatherEnabled) {
     clearWeatherDisplay("Weather disabled in settings.");
     return;
@@ -59,9 +67,18 @@ export async function fetchWeather(latitude, longitude, locationName = null) {
 
   try {
     const response = await fetch(url);
-    const data = await response.json();
 
+    if (!response.ok) {
+      throw new Error(`Weather request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
     const current = data.current;
+
+    if (!current) {
+      throw new Error("Weather response missing current conditions.");
+    }
+
     const temperature = current.temperature_2m;
     const precipitation = current.precipitation;
     const weatherCode = current.weather_code;
@@ -71,14 +88,20 @@ export async function fetchWeather(latitude, longitude, locationName = null) {
     applyWeatherBonus(weatherCode, precipitation, temperature);
 
     savePudData();
-  } catch (error) {
-    console.error("Weather fetch failed:", error);
+
+    if (showNotification) {
+      showToast("🌦️ Weather updated.", "notification");
+    }
+  } catch (exception) {
+    console.error("Weather fetch failed:", exception);
     clearWeatherDisplay("Weather fetch failed.");
+    showToast("🌦️ Weather error", "error");
   }
 }
 
 export function applyWeatherBonus(weatherCode, precipitation, temperature) {
   let status = "Unknown conditions";
+
   state.weatherBonus = 0;
 
   if (precipitation > 0) {
@@ -111,7 +134,7 @@ export function applyWeatherBonus(weatherCode, precipitation, temperature) {
   updateApproval();
 }
 
-export async function searchWeatherLocation() {
+export async function searchWeatherLocation(showNotification = true) {
   if (!settings.weatherEnabled) {
     clearWeatherDisplay("Weather disabled in settings.");
     return;
@@ -122,6 +145,7 @@ export async function searchWeatherLocation() {
 
   if (query === "") {
     clearWeatherDisplay("Enter a location first.");
+    showToast("🌦️ Weather error", "error");
     return;
   }
 
@@ -136,20 +160,39 @@ export async function searchWeatherLocation() {
 
   try {
     const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Location search failed: ${response.status}`);
+    }
+
     const data = await response.json();
 
     if (!data.results || data.results.length === 0) {
       clearWeatherDisplay("No location found.");
+
+      if (showNotification) {
+        showToast("🌦️ Weather error", "error");
+      }
+
       return;
     }
 
     const place = data.results[0];
     const locationName = `${place.name}, ${place.country}`;
 
-    fetchWeather(place.latitude, place.longitude, locationName);
-  } catch (error) {
-    console.error("Location search failed:", error);
+    fetchWeather(
+      place.latitude,
+      place.longitude,
+      locationName,
+      showNotification,
+    );
+  } catch (exception) {
+    console.error("Location search failed:", exception);
     clearWeatherDisplay("Location search failed.");
+
+    if (showNotification) {
+      showToast("🌦️ Weather error", "error");
+    }
   }
 }
 
@@ -174,7 +217,7 @@ export function loadPreferredWeather() {
     input.value = settings.preferredLocation;
   }
 
-  searchWeatherLocation();
+  searchWeatherLocation(false);
 }
 
 export function clearWeatherDisplay(message = "Not loaded") {
@@ -184,6 +227,7 @@ export function clearWeatherDisplay(message = "Not loaded") {
   setText("weatherBonus", "0");
 
   state.weatherBonus = 0;
+
   updateApproval();
 }
 

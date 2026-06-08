@@ -1,5 +1,6 @@
 import { state } from "./state.js";
 import { updateCertification } from "./certifications.js";
+import { showToast } from "./toast.js";
 
 export const achievementRules = [
   {
@@ -60,6 +61,7 @@ export function checkAchievements() {
       !state.unlockedAchievements.includes(achievement.id)
     ) {
       state.unlockedAchievements.push(achievement.id);
+      showToast(`🏆 Achievement Unlocked: ${achievement.name}`, "achievement");
     }
   });
 
