@@ -56,12 +56,17 @@ export const achievementRules = [
 
 export function checkAchievements() {
   achievementRules.forEach(function (achievement) {
-    if (
-      achievement.condition() &&
-      !state.unlockedAchievements.includes(achievement.id)
-    ) {
+    const alreadyUnlocked = state.unlockedAchievements.includes(achievement.id);
+
+    if (achievement.condition() && !alreadyUnlocked) {
       state.unlockedAchievements.push(achievement.id);
-      showToast(`🏆 Achievement Unlocked: ${achievement.name}`, "achievement");
+
+      if (state.hasLoaded) {
+        showToast(
+          `🏅 Achievement Unlocked: ${achievement.name}`,
+          "achievement",
+        );
+      }
     }
   });
 
