@@ -13,6 +13,13 @@ export const pudImages = [
   "../assets/images/pud/pud-on-bed-1.jpg",
   "../assets/images/pud/pud-on-bed-2.jpg",
   "../assets/images/pud/pud-window.jpg",
+  "../assets/images/pud/pud-office-3.jpg",
+  "../assets/images/pud/pud-car.jpg",
+  "../assets/images/pud/pud-chest.jpg",
+  "../assets/images/pud/pud-plane.jpg",
+  "../assets/images/pud/pud-very-close.jpg",
+  "../assets/images/pud/pud-office-4.jpg",
+  "../assets/images/pud/pud-close-bed.jpg",
 ];
 
 export function renderPudImage() {
