@@ -9,6 +9,7 @@
 @import url("./slideshow.css");
 @import url("./sounds.css");
 @import url("./settings.css");
+@import url("./toast.css");
 
 .hidden {
   display: none !important;

@@ -1,5 +1,6 @@
 import { state } from "./state.js";
 import { settings } from "./settings.js";
+import { showToast } from "./toast.js";
 
 export const soundLibrary = {
   rainfall: ["rain.mp3", "surface.mp3"],
@@ -91,6 +92,10 @@ export function loadSoundEnvironment(environment) {
   });
 
   attachSoundEventListeners();
+
+  if (environment) {
+    showToast(`🎧 ${environment} environment loaded`, "notification");
+  }
 }
 
 function attachSoundEventListeners() {
@@ -182,6 +187,7 @@ export function toggleCustomSound() {
   } else {
     state.customSound.pause();
   }
+  showToast("🎵 Custom audio loaded", "notification");
 }
 
 export function setCustomSoundVolume(value) {
@@ -204,4 +210,5 @@ export function removeCustomSound() {
   if (input) {
     input.value = "";
   }
+  showToast("🗑️ Custom audio removed", "notification");
 }

@@ -257,10 +257,6 @@
 
           <strong> <span id="approval">0</span>% </strong>
         </div>
-
-        <div class="metric-row">
-          <button onclick="resetPudData()">Reset Pud Data</button>
-        </div>
       </section>
 
       <section class="card">
@@ -402,6 +398,19 @@
           </div>
         </div>
       </section>
+      <section class="card danger-zone">
+        <h2>⚠️ Danger Zone</h2>
+
+        <p>
+          Reset all saved Pud data, including stats, logs, achievements, timers,
+          settings, and weather state.
+        </p>
+
+        <button class="danger-button" onclick="resetPudData()">
+          Reset Pud Data
+        </button>
+      </section>
+      <div id="toastContainer"></div>
     </main>
 
     <script type="module" src="./js/app.js"></script>
