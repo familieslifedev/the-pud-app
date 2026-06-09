@@ -3,6 +3,7 @@ import { stopAllSounds, loadSoundEnvironment } from "./sounds.js";
 import { stopPudSlideshow } from "./slideshow.js";
 import { savePudData } from "./storage.js";
 import { clearWeatherDisplay, syncWeatherInputs } from "./weather.js";
+import { showToast } from "./toast.js";
 
 export let settings = {
   soundsEnabled: true,
@@ -17,6 +18,7 @@ export function updateSetting(key, value) {
 
   applySettings();
   savePudData();
+  showToast("💾 Settings saved", "notification");
 }
 
 export function loadSettings(savedSettings = {}) {

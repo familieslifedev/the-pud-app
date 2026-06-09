@@ -1,5 +1,6 @@
 import { certifications } from "./data.js";
 import { state } from "./state.js";
+import { showToast } from "./toast.js";
 
 export function updateCertification() {
   let certification = certifications[0];
@@ -24,5 +25,11 @@ export function updateCertification() {
     certification = certifications[5];
   }
 
-  document.getElementById("achievement").textContent = `👁️ ${certification}`;
+  const achievementElement = document.getElementById("achievement");
+  const newText = `👁️ ${certification}`;
+
+  if (achievementElement && achievementElement.textContent !== newText) {
+    achievementElement.textContent = newText;
+    showToast(`🎖️ Certification Promoted: ${certification}`, "achievement");
+  }
 }

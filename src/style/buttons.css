@@ -37,3 +37,16 @@ button:disabled {
 .danger-button:hover {
   background: #b91c1c;
 }
+
+.danger-zone {
+  border: 2px solid #991b1b;
+  background: #fff7ed;
+}
+
+.danger-zone h2 {
+  color: #7f1d1d;
+}
+
+.danger-zone p {
+  color: #7f1d1d;
+}
