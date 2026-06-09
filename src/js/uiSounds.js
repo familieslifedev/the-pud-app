@@ -5,6 +5,8 @@ const uiSounds = {
   error: "../assets/sounds/ui/error.oga",
   pomodoro: "../assets/sounds/ui/pomodoro.oga",
   notification: "../assets/sounds/ui/notification.oga",
+  reset: "../assets/sounds/ui/reset.oga",
+  fart: "../assets/sounds/ui/fart.oga",
 };
 
 export function playUiSound(type) {
@@ -17,4 +19,10 @@ export function playUiSound(type) {
   audio.play().catch(function () {
     console.log("UI sound blocked until user interaction.");
   });
+}
+
+export function playErrorSound() {
+  const sound = Math.random() < 0.1 ? "fart" : "error";
+
+  playUiSound(sound);
 }

@@ -1,11 +1,15 @@
-import { playUiSound } from "./uiSounds.js";
+import { playUiSound, playErrorSound } from "./uiSounds.js";
 
 export function showToast(message, type = "notification") {
   const container = document.getElementById("toastContainer");
 
   if (!container) return;
 
-  playUiSound(type);
+  if (type === "error") {
+    playErrorSound();
+  } else {
+    playUiSound(type);
+  }
 
   const toast = document.createElement("div");
 

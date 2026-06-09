@@ -56,6 +56,7 @@ export function resetUptime() {
   state.uptimeSeconds = 0;
   renderTimers();
   savePudData();
+  showToast("🔄 Uptime reset", "notification");
 }
 
 export function startPomodoro() {
@@ -90,4 +91,5 @@ export function resetPomodoro() {
   state.pomodoroSeconds = 25 * 60;
   renderTimers();
   savePudData();
+  showToast("🔄 Pomodoro reset", "notification");
 }

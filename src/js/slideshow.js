@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { settings } from "./settings.js";
 import { savePudData } from "./storage.js";
+import { showToast } from "./toast.js";
 
 export const pudImages = [
   "../assets/images/pud/pud-close.jpg",
@@ -58,13 +59,17 @@ export function togglePudSlideshow() {
   if (state.slideshowInterval !== null) {
     clearInterval(state.slideshowInterval);
     state.slideshowInterval = null;
+    showToast("🖼️ Pud slideshow stopped", "notification");
     return;
   }
 
   state.slideshowInterval = setInterval(nextPudImage, 4000);
+
+  showToast("🖼️ Pud slideshow started", "notification");
 }
 
 export function stopPudSlideshow() {
   clearInterval(state.slideshowInterval);
   state.slideshowInterval = null;
+  showToast("🖼️ Pud slideshow stopped", "notification");
 }
