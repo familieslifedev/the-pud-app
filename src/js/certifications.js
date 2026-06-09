@@ -30,6 +30,9 @@ export function updateCertification() {
 
   if (achievementElement && achievementElement.textContent !== newText) {
     achievementElement.textContent = newText;
-    showToast(`🎖️ Certification Promoted: ${certification}`, "achievement");
+
+    if (state.hasLoaded) {
+      showToast(`🎖️ Certification Promoted: ${certification}`, "achievement");
+    }
   }
 }

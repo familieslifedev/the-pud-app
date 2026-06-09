@@ -1,4 +1,6 @@
 export const state = {
+  hasLoaded: false,
+
   currentLocation: "Home",
 
   bugs: 0,

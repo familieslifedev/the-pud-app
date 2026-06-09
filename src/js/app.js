@@ -2,6 +2,7 @@ import { loadPudData } from "./storage.js";
 import { applySettings, updateSetting } from "./settings.js";
 import { finishLoading } from "./loading.js";
 import { showToast } from "./toast.js";
+import { state } from "./state.js";
 
 import {
   generateQuote,
@@ -85,3 +86,4 @@ loadPudData();
 applySettings();
 loadPreferredWeather();
 finishLoading();
+state.hasLoaded = true;
