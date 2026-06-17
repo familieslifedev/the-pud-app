@@ -52,6 +52,27 @@ export const achievementRules = [
       return state.approval === 100;
     },
   },
+  {
+    id: "three_day_puddle",
+    name: "🔥 3 Day Puddle",
+    condition: function () {
+      return state.currentStreak >= 3;
+    },
+  },
+  {
+    id: "seven_day_operator",
+    name: "🔥 7 Day Operator",
+    condition: function () {
+      return state.currentStreak >= 7;
+    },
+  },
+  {
+    id: "thirty_day_amphibian",
+    name: "🔥 30 Day Amphibian",
+    condition: function () {
+      return state.currentStreak >= 30;
+    },
+  },
 ];
 
 export function checkAchievements() {

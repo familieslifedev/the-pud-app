@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { savePudData } from "./storage.js";
 import { showToast } from "./toast.js";
+import { checkAchievements } from "./achievements.js";
 
 export function updateStreak() {
   const today = new Date().toISOString().split("T")[0];
@@ -34,7 +35,7 @@ export function updateStreak() {
 
     showToast(
       `🔥 Streak Increased: ${state.currentStreak} Days`,
-      "achievement",
+      "notification",
     );
   } else {
     state.currentStreak = 1;
@@ -42,6 +43,8 @@ export function updateStreak() {
 
   state.lastActiveDate = today;
 
+  renderStreak();
+  checkAchievements();
   savePudData();
 }
 
