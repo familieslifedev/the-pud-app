@@ -45,6 +45,10 @@ export function savePudData() {
     currentPudImageIndex: state.currentPudImageIndex,
 
     settings,
+
+    currentStreak: state.currentStreak,
+    longestStreak: state.longestStreak,
+    lastActiveDate: state.lastActiveDate,
   };
 
   localStorage.setItem("pudData", JSON.stringify(pudData));
@@ -113,6 +117,10 @@ export function loadPudData() {
 
   updateApproval();
   applySettings();
+
+  state.currentStreak = pudData.currentStreak ?? 0;
+  state.longestStreak = pudData.longestStreak ?? 0;
+  state.lastActiveDate = pudData.lastActiveDate ?? null;
 }
 
 export function loadDefaultPudData() {

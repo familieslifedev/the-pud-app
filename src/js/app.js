@@ -47,6 +47,8 @@ import {
   syncWeatherInputs,
 } from "./weather.js";
 
+import { updateStreak, renderStreak } from "./streaks.js";
+
 window.generateQuote = generateQuote;
 window.setLocation = setLocation;
 window.changeMetric = changeMetric;
@@ -83,6 +85,8 @@ window.syncWeatherInputs = syncWeatherInputs;
 window.updateSetting = updateSetting;
 
 loadPudData();
+updateStreak();
+renderStreak();
 applySettings();
 loadPreferredWeather();
 finishLoading();

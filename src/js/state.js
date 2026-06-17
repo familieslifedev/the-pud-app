@@ -27,4 +27,8 @@ export const state = {
 
   activeSounds: {},
   customSound: null,
+
+  currentStreak: 0,
+  longestStreak: 0,
+  lastActiveDate: null,
 };
