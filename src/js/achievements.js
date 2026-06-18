@@ -73,6 +73,20 @@ export const achievementRules = [
       return state.currentStreak >= 30;
     },
   },
+  {
+    id: "hundred_day_moisture_veteran",
+    name: "🔥 100 Day Moisture Veteran",
+    condition: function () {
+      return state.currentStreak >= 100;
+    },
+  },
+  {
+    id: "year_long_wooper",
+    name: "👑 365 Day Wooper",
+    condition: function () {
+      return state.currentStreak >= 365;
+    },
+  },
 ];
 
 export function checkAchievements() {
