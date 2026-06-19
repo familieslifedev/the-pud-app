@@ -85,9 +85,11 @@ window.syncWeatherInputs = syncWeatherInputs;
 window.updateSetting = updateSetting;
 
 loadPudData();
-updateStreak();
 renderStreak();
 applySettings();
 loadPreferredWeather();
-finishLoading();
-state.hasLoaded = true;
+
+finishLoading(function () {
+  state.hasLoaded = true;
+  updateStreak();
+});

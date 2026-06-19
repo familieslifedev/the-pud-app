@@ -48,6 +48,7 @@ export function savePudData() {
 
     currentStreak: state.currentStreak,
     longestStreak: state.longestStreak,
+    previousStreak: state.previousStreak,
     lastActiveDate: state.lastActiveDate,
   };
 
@@ -120,6 +121,7 @@ export function loadPudData() {
 
   state.currentStreak = pudData.currentStreak ?? 0;
   state.longestStreak = pudData.longestStreak ?? 0;
+  state.previousStreak = pudData.previousStreak ?? 0;
   state.lastActiveDate = pudData.lastActiveDate ?? null;
 }
 

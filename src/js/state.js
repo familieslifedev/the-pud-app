@@ -30,5 +30,6 @@ export const state = {
 
   currentStreak: 0,
   longestStreak: 0,
+  previousStreak: 0,
   lastActiveDate: null,
 };
