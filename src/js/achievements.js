@@ -52,6 +52,48 @@ export const achievementRules = [
       return state.approval === 100;
     },
   },
+  {
+    id: "three_day_puddle",
+    name: "🔥 3 Day Puddle",
+    condition: function () {
+      return state.currentStreak >= 3;
+    },
+  },
+  {
+    id: "seven_day_operator",
+    name: "🔥 7 Day Operator",
+    condition: function () {
+      return state.currentStreak >= 7;
+    },
+  },
+  {
+    id: "fourteen_day_damp_discipline",
+    name: "🔥 14 Day Damp Discipline",
+    condition: function () {
+      return state.currentStreak >= 14;
+    },
+  },
+  {
+    id: "thirty_day_amphibian",
+    name: "🔥 30 Day Amphibian",
+    condition: function () {
+      return state.currentStreak >= 30;
+    },
+  },
+  {
+    id: "hundred_day_moisture_veteran",
+    name: "🔥 100 Day Moisture Veteran",
+    condition: function () {
+      return state.currentStreak >= 100;
+    },
+  },
+  {
+    id: "year_long_wooper",
+    name: "👑 365 Day Wooper",
+    condition: function () {
+      return state.currentStreak >= 365;
+    },
+  },
 ];
 
 export function checkAchievements() {
