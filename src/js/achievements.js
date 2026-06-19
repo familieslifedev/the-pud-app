@@ -67,6 +67,13 @@ export const achievementRules = [
     },
   },
   {
+    id: "fourteen_day_damp_discipline",
+    name: "🔥 14 Day Damp Discipline",
+    condition: function () {
+      return state.currentStreak >= 14;
+    },
+  },
+  {
     id: "thirty_day_amphibian",
     name: "🔥 30 Day Amphibian",
     condition: function () {
