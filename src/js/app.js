@@ -48,6 +48,7 @@ import {
 } from "./weather.js";
 
 import { updateStreak, renderStreak } from "./streaks.js";
+import { renderGreeting } from "./greetings.js";
 
 window.generateQuote = generateQuote;
 window.setLocation = setLocation;
@@ -92,4 +93,5 @@ loadPreferredWeather();
 finishLoading(function () {
   state.hasLoaded = true;
   updateStreak();
+  renderGreeting();
 });

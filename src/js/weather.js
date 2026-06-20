@@ -3,6 +3,7 @@ import { settings } from "./settings.js";
 import { updateApproval } from "./approval.js";
 import { savePudData, setText } from "./storage.js";
 import { showToast } from "./toast.js";
+import { renderGreeting } from "./greetings.js";
 
 export function getWeather() {
   if (!settings.weatherEnabled) {
@@ -132,6 +133,7 @@ export function applyWeatherBonus(weatherCode, precipitation, temperature) {
   setText("weatherBonus", state.weatherBonus);
 
   updateApproval();
+  renderGreeting();
 }
 
 export async function searchWeatherLocation(showNotification = true) {
@@ -229,6 +231,7 @@ export function clearWeatherDisplay(message = "Not loaded") {
   state.weatherBonus = 0;
 
   updateApproval();
+  renderGreeting();
 }
 
 export function syncWeatherInputs() {
