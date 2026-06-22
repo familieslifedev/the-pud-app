@@ -10,6 +10,7 @@
 @import url("./sounds.css");
 @import url("./settings.css");
 @import url("./toast.css");
+@import url("./greetings.css");
 
 .hidden {
   display: none !important;
