@@ -14,7 +14,7 @@ export const timeGreetingGroups = [
     end: 11,
     core: "good morning. amphibian systems are coming online. beverage acquisition recommended.",
     messages: [
-      "transportation phase approaching.",
+      "productivity forecast positive.",
       "systems online. morale acceptable.",
       "morning deployment authorised.",
     ],
