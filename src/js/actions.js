@@ -6,6 +6,7 @@ import { updateApproval } from "./approval.js";
 import { checkAchievements } from "./achievements.js";
 import { savePudData } from "./storage.js";
 import { showToast } from "./toast.js";
+import { renderGreeting } from "./greetings.js";
 
 export function generateQuote() {
   const quote = quotes[randomNumber(0, quotes.length - 1)];
@@ -32,6 +33,7 @@ export function setLocation(place) {
   document.getElementById("adventure").value = data.adventure;
 
   updateApproval();
+  renderGreeting();
   updateIncidentId();
   savePudData();
 }
