@@ -119,14 +119,19 @@ export function applyWeatherBonus(weatherCode, precipitation, temperature) {
     state.weatherBonus = 6;
   }
 
-  if (temperature >= 26) {
+  if (temperature >= 25) {
     status = "Heat detected. Pud stability reduced.";
-    state.weatherBonus -= 6;
+    state.weatherBonus = -4;
+  }
+
+  if (temperature >= 30) {
+    status = "Big heat detected. Pud is slowly roasting.";
+    state.weatherBonus = -6;
   }
 
   if (temperature <= 6) {
     status = "Cold detected. Pud requests blanket support.";
-    state.weatherBonus -= 3;
+    state.weatherBonus = -3;
   }
 
   setText("weatherStatus", status);
