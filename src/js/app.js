@@ -37,6 +37,7 @@ import {
   previousPudImage,
   togglePudSlideshow,
   stopPudSlideshow,
+  initPudUploader,
 } from "./slideshow.js";
 
 import {
@@ -95,3 +96,5 @@ finishLoading(function () {
   updateStreak();
   renderGreeting();
 });
+
+initPudUploader();

@@ -12,3 +12,9 @@
 .slideshow-card {
   text-align: center;
 }
+
+.pud-upload-panel { margin-top: 1rem; display: grid; gap: .6rem; }
+.pud-upload-panel input { max-width: 100%; }
+.pud-upload-gallery { display: grid; grid-template-columns: repeat(auto-fill,minmax(100px,1fr)); gap: .7rem; }
+.pud-upload-gallery > div { display: grid; gap: .3rem; }
+.pud-upload-gallery img { width: 100%; height: 100px; object-fit: cover; border-radius: .5rem; }

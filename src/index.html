@@ -95,6 +95,13 @@
 
               <button onclick="togglePudSlideshow()">Start / Stop ⏯️</button>
             </div>
+            <div class="pud-upload-panel">
+              <label for="pudImageUpload">Add your own Pud photos</label>
+              <input id="pudImageUpload" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple />
+              <button type="button" id="pudUploadButton">Upload photos 📤</button>
+              <p id="pudUploadStatus" role="status" aria-live="polite">JPG, PNG, WebP or GIF, up to 8 MB each.</p>
+              <div id="pudUploadedGallery" class="pud-upload-gallery"></div>
+            </div>
           </div>
         </section>
       </div>

@@ -1,1 +1,11 @@
 .DS_Store
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+
+# SQLite databases
+/storage/*.sqlite
+/storage/*.sqlite3
+/storage/*.db
+/storage/*.sqlite-*
+/storage/*.sqlite3-*
+/storage/*.db-*
