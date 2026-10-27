@@ -4,7 +4,7 @@ import { randomNumber } from "./utils.js";
 import { renderStats, updateIncidentId } from "./ui.js";
 import { updateApproval } from "./approval.js";
 import { checkAchievements } from "./achievements.js";
-import { savePudData } from "./storage.js";
+import { savePudData, resetStoredPudData } from "./storage.js";
 import { showToast } from "./toast.js";
 import { renderGreeting } from "./greetings.js";
 
@@ -104,7 +104,7 @@ export function clearMissionLog() {
   showToast("🗑️ Mission log cleared", "notification");
 }
 
-export function resetPudData() {
+export async function resetPudData() {
   const confirmed = confirm(
     "Reset all Pud data? This will remove saved stats, logs, achievements, timers, settings, and weather state.",
   );
@@ -113,7 +113,8 @@ export function resetPudData() {
     return;
   }
 
-  localStorage.removeItem("pudData");
+  try { await resetStoredPudData(); }
+  catch (error) { alert('Reset failed: ' + error.message); return; }
 
   showToast("🔄 Pud Data Reset", "reset");
 

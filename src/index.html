@@ -424,7 +424,14 @@
           </div>
         </div>
       </section>
-      <section class="card danger-zone">
+      <section class="card"><h2>Data Backup 💾</h2>
+<p>Export Pud data as JSON or import an existing backup. Import replaces saved data.</p>
+<button id="pudExport">Export JSON</button>
+<input type="file" id="pudImportFile" accept="application/json,.json" />
+<button id="pudImport">Import JSON</button>
+<p id="pudBackupStatus" role="status"></p>
+</section>
+<section class="card danger-zone">
         <h2>⚠️ Danger Zone</h2>
 
         <p>

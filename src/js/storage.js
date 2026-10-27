@@ -16,7 +16,14 @@ import { updateApproval } from "./approval.js";
 
 import { settings, loadSettings, applySettings } from "./settings.js";
 
+let hydrated = false;
+let pendingSave = null;
+let csrf = '';
+let saveSequence = Promise.resolve();
+
 export function savePudData() {
+  if (!hydrated) return;
+
   const pudData = {
     currentLocation: state.currentLocation,
 
@@ -52,11 +59,24 @@ export function savePudData() {
     lastActiveDate: state.lastActiveDate,
   };
 
-  localStorage.setItem("pudData", JSON.stringify(pudData));
+  clearTimeout(pendingSave);
+  pendingSave = setTimeout(() => {
+    const snapshot = JSON.stringify(pudData);
+    saveSequence = saveSequence.catch(() => {}).then(async () => {
+      const response = await fetch('/api/state.php', {method:'PUT',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:snapshot});
+      if (!response.ok) throw new Error('Pud state could not be saved');
+    });
+    saveSequence.catch(error => console.error(error));
+  }, 1200);
 }
 
-export function loadPudData() {
-  const savedData = localStorage.getItem("pudData");
+export async function loadPudData() {
+  const response = await fetch('/api/state.php');
+  if (!response.ok) throw new Error('Cannot load Pud database');
+  const result = await response.json();
+  csrf = result.csrf;
+  const savedData = result.data;
+
 
   if (savedData === null) {
     loadDefaultPudData();
@@ -64,10 +84,11 @@ export function loadPudData() {
     loadSettings();
     applySettings();
 
+    hydrated = true;
     return;
   }
 
-  const pudData = JSON.parse(savedData);
+  const pudData = savedData;
 
   state.currentLocation = pudData.currentLocation ?? "Home";
 
@@ -123,7 +144,28 @@ export function loadPudData() {
   state.longestStreak = pudData.longestStreak ?? 0;
   state.previousStreak = pudData.previousStreak ?? 0;
   state.lastActiveDate = pudData.lastActiveDate ?? null;
+  hydrated = true;
 }
+
+export async function resetStoredPudData() {
+  clearTimeout(pendingSave);
+  hydrated = false;
+  await saveSequence.catch(() => {});
+  const response = await fetch('/api/state.php', {method:'DELETE',headers:{'X-CSRF-Token':csrf}});
+  if (!response.ok) throw new Error('Reset failed');
+}
+
+export async function importPudData(data) {
+  const response = await fetch('/api/state.php', {method:'PUT',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify(data)});
+  if (!response.ok) throw new Error('Import failed');
+}
+
+export async function exportPudData() {
+  const response = await fetch('/api/state.php');
+  if (!response.ok) throw new Error('Export failed');
+  return (await response.json()).data;
+}
+
 
 export function loadDefaultPudData() {
   setLocation(state.currentLocation);

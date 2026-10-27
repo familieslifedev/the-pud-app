@@ -1,4 +1,4 @@
-import { loadPudData } from "./storage.js";
+import { loadPudData, exportPudData, importPudData } from "./storage.js";
 import { applySettings, updateSetting } from "./settings.js";
 import { finishLoading } from "./loading.js";
 import { showToast } from "./toast.js";
@@ -86,15 +86,37 @@ window.syncWeatherInputs = syncWeatherInputs;
 
 window.updateSetting = updateSetting;
 
-loadPudData();
-renderStreak();
-applySettings();
-loadPreferredWeather();
+async function bootPud() {
+  try {
+    await loadPudData();
+    renderStreak();
+    applySettings();
+    loadPreferredWeather();
+    await initPudUploader();
+    finishLoading(function () {
+      state.hasLoaded = true;
+      updateStreak();
+      renderGreeting();
+    });
+  } catch (error) {
+    console.error('Pud startup failed:', error);
+    alert('Pud could not load saved data. Check the PHP server and SQLite extension.');
+  }
+}
+bootPud();
 
-finishLoading(function () {
-  state.hasLoaded = true;
-  updateStreak();
-  renderGreeting();
+document.getElementById('pudExport')?.addEventListener('click', async () => {
+ try {
+  const data = await exportPudData();
+  const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)],{type:'application/json'}));
+  const link = document.createElement('a'); link.href=url; link.download='pud-backup.json'; link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+ } catch(error) { document.getElementById('pudBackupStatus').textContent=error.message; }
 });
-
-initPudUploader();
+document.getElementById('pudImport')?.addEventListener('click', async () => {
+ const file=document.getElementById('pudImportFile').files[0];
+ if (!file) return;
+ if (!confirm('Replace Pud saved data with this JSON backup?')) return;
+ try { await importPudData(JSON.parse(await file.text())); location.reload(); }
+ catch(error) { document.getElementById('pudBackupStatus').textContent=error.message; }
+});
